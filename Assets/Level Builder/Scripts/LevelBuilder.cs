@@ -14,6 +14,7 @@ public class LevelBuilder : EditorWindow
     private Input _input;
     private RayCaster _rayCaster;
     private Catalog _catalog;
+    private CreateAvailability _createAvailability;
     private Creator _creation;
     private CurrentObjectEditor _currentObjectEditor;
     private Preview _preview;
@@ -40,9 +41,10 @@ public class LevelBuilder : EditorWindow
         _input = new Input();
         _rayCaster = new RayCaster();
         _catalog = new Catalog();
-        _currentObjectEditor = new CurrentObjectEditor(_input, _disposable);
-        _creation = new Creator(_options, _input, _rayCaster, _catalog, _currentObjectEditor, _disposable);
-        _preview = new Preview(this, _options, _rayCaster, _catalog, _currentObjectEditor, _disposable);
+        _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
+        _createAvailability = new CreateAvailability(_currentObjectEditor, _rayCaster);
+        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _disposable);
+        _preview = new Preview(this, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
     }
 
     private void OnEnable()
@@ -101,6 +103,7 @@ public class LevelBuilder : EditorWindow
                     _rayCaster.Raycast();
                     _preview.Draw(sceneView);
                     _input.CheckInputs();
+                    _createAvailability.Update();
                 }
             }
         }
@@ -329,6 +332,39 @@ public class LevelBuilder : EditorWindow
             }
         }
     }
+    public class CreateAvailability
+    {
+        private readonly CurrentObjectEditor _currentObjectEditor;
+        private readonly RayCaster _rayCaster = new RayCaster();
+
+        private readonly ReactiveProperty<bool> _availability = new ReactiveProperty<bool>();
+
+        public CreateAvailability(CurrentObjectEditor currentObjectEditor, RayCaster rayCaster)
+        {
+            _currentObjectEditor = currentObjectEditor;
+            _rayCaster = rayCaster;
+        }
+
+        public IReadOnlyReactiveProperty<bool> Availability => _availability;
+
+        public void Update()
+        {
+            _availability.Value = IsOverlapOtherObjects();
+        }
+
+        private bool IsOverlapOtherObjects()
+        {
+            Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
+            Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize);
+
+            if (hitColliders.Length == 1)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
     public class Creator
     {
         private readonly Options _options;
@@ -339,12 +375,11 @@ public class LevelBuilder : EditorWindow
 
         public GameObject LastCreatedObject { get; private set; }
 
-        public Creator(Options options, Input input, RayCaster raycaster, Catalog catalog, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
         {
             _options = options;
             _input = input;
             _rayCaster = raycaster;
-            _catalog = catalog;
             _currentObjectEditor = currentObjectEditor;
 
             _input
@@ -358,11 +393,9 @@ public class LevelBuilder : EditorWindow
 
         private void Create(Vector3 position)
         {
-            GameObject prefab = _catalog.SelectedElement.Value;
-
-            LastCreatedObject = Instantiate(prefab, position, _currentObjectEditor.Rotation.Value);
+            LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
             LastCreatedObject.transform.parent = _options.Parent.transform;
-    
+      
             Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
         }
     }
@@ -370,9 +403,9 @@ public class LevelBuilder : EditorWindow
     {
         private readonly Input _input;
 
-        private readonly ReactiveProperty<Quaternion> _rotation = new ReactiveProperty<Quaternion>();
+        public GameObject CurrentObject;
 
-        public CurrentObjectEditor(Input input, CompositeDisposable disposable)
+        public CurrentObjectEditor(Input input, Catalog catalog, CompositeDisposable disposable)
         {
             _input = input;
 
@@ -404,27 +437,32 @@ public class LevelBuilder : EditorWindow
                         RotateY(0.5f);
                 })
                 .AddTo(disposable);
-        }
 
-        public IReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
+            catalog
+                .SelectedElement
+                .Subscribe(_ => CurrentObject = _)
+                .AddTo(disposable);
+        }
 
         private void RotateY(float angle)
         {
-            _rotation.Value = Quaternion.Euler(0, _rotation.Value.eulerAngles.y + angle, 0);
+            CurrentObject.transform.rotation = Quaternion.Euler(0, CurrentObject.transform.rotation.eulerAngles.y + angle, 0);
         }
     }
     public class Preview
     {
         private readonly Options _options;
         private readonly RayCaster _rayCaster;
+        private readonly CurrentObjectEditor _currentObjectEditor;
 
         private GameObject _preview;
         private MeshRenderer _previewMeshRenderer;
 
-        public Preview(LevelBuilder levelBuilder, Options options, RayCaster rayCaster, Catalog catalog, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        public Preview(LevelBuilder levelBuilder, Options options, RayCaster rayCaster, Catalog catalog, CreateAvailability createAvailability, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
         {
             _options = options;
             _rayCaster = rayCaster;
+            _currentObjectEditor = currentObjectEditor;
 
             catalog
                 .SelectedElement
@@ -452,14 +490,11 @@ public class LevelBuilder : EditorWindow
                 })
                 .AddTo(disposable);
 
-            currentObjectEditor
-                .Rotation
+            createAvailability
+                .Availability
                 .Skip(1)
-                .Where(_ => _preview != null)
-                .Subscribe(_ => _preview.transform.rotation = _)
+                .Subscribe(value => SetPreviewMaterial(value))
                 .AddTo(disposable);
-
-            //Subscribe SetPreviewMaterial to buildAvailability
         }
 
         public void Draw(SceneView sceneView)
@@ -477,6 +512,7 @@ public class LevelBuilder : EditorWindow
             {
                 _previewMeshRenderer.enabled = true;
                 _preview.transform.position = mousePosition;
+                _preview.transform.rotation = _currentObjectEditor.CurrentObject.transform.rotation;
             }
         }
 
