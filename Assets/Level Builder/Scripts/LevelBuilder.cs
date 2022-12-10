@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Numerics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -28,10 +29,23 @@ public class LevelBuilder : EditorWindow
     private Vector3 _selectedElementSize;
     private List<GameObject> _catalog = new List<GameObject>();
     private bool _building;
-    private LayerMask _layerForBuild;
+    private bool _snapToNearObject;
+    private LayerMask _groundLayer;
     private LayerMask _buildingsLayer;
+    private LayerMask _roadsLayer;
 
     private int _selectedTabNumber = 0;
+    
+    private Vector3[] _directionVectors = new[]
+    {
+        Vector3.forward,
+        Vector3.right,
+        Vector3.back,
+        Vector3.left,
+    };
+
+    private int _currentDirectionIndex = 0;
+    
 
     private Dictionary<string, string> _tabs = new Dictionary<string, string>()
     {
@@ -58,8 +72,12 @@ public class LevelBuilder : EditorWindow
     private void OnGUI()
     {
         _parent = (GameObject)EditorGUILayout.ObjectField("Parent", _parent, typeof(GameObject), true);
-        _layerForBuild = EditorGUILayout.LayerField("Ground Layer", _layerForBuild);
+        _groundLayer = EditorGUILayout.LayerField("Ground Layer", _groundLayer);
         _buildingsLayer = EditorGUILayout.LayerField("Buildings Layer", _buildingsLayer);
+        _roadsLayer = EditorGUILayout.LayerField("Roads layer", _roadsLayer);
+        _rotationValue = EditorGUILayout.Vector3Field("Rotation values:", _rotationValue);
+        _snapToNearObject = GUILayout.Toggle(_snapToNearObject, "Snap to near object", "Button", GUILayout.Height(40));
+        
         // _buildingsLayer = EditorGUILayout.MaskField("Buildings", _buildingsLayer);
         //
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
@@ -95,28 +113,48 @@ public class LevelBuilder : EditorWindow
  
             if (CheckRotateClockwiseInput())
             {
-                Debug.Log("Clockwise");
+                // Debug.Log("Clockwise");
                 RotateOject(_rotationValue);
             }
 
             if (CheckRotateCounterClockwiseInput())
             {
-                Debug.Log("CounterClockwise");
+                // Debug.Log("CounterClockwise");
                 RotateOject(-_rotationValue);
             }
             
             if (Raycast(out Vector3 contactPoint))
             {
-                DrawPounter(contactPoint);
-                
-                if (CheckInput())
+                if (_snapToNearObject)
                 {
-                    if (IsAbleToPlaceObject(contactPoint, boundsSize))
+                    contactPoint = SnapObjectToGridRoadVersion(contactPoint, boundsSize, out bool isSnapped);
+                    
+                    DrawPointer(contactPoint);
+                    
+                    if (CheckChangeSnapDirectionInput())
+                    {
+                        ChangeSnapDirection();
+                    }
+
+                    if (CheckInput() && isSnapped)
                     {
                         CreateObject(contactPoint, _currentRotation);
                     }
                 }
 
+                if (!_snapToNearObject)
+                {
+                    DrawPointer(contactPoint);
+                    
+                    if (CheckInput())
+                    {
+                        if (IsAbleToPlaceObject(contactPoint, boundsSize))
+                        {
+                            CreateObject(contactPoint, _currentRotation);
+                        }
+                    }
+                }
+                
                 sceneView.Repaint();
             }
         }
@@ -131,20 +169,22 @@ public class LevelBuilder : EditorWindow
         if (Physics.Raycast(guiRay, out RaycastHit raycastHit))
         {
             contactPoint = raycastHit.point;
-            if (raycastHit.collider.gameObject.layer == _layerForBuild.value)
+            // Debug.Log($"contactPoint: {contactPoint.x} {contactPoint.y} {contactPoint.z}");
+            if (raycastHit.collider.gameObject.layer == _groundLayer.value)
             {
                 return true;
             }
         }
 
-        return false;
+        return true;
     }
 
-    private void DrawPounter(Vector3 position)
+    private void DrawPointer(Vector3 position)
     {
         _catalog[_selectedElement].GetComponent<MeshRenderer>().transform.rotation = Quaternion.Euler(_currentRotation);
         Vector3 boundsSize = _catalog[_selectedElement].GetComponent<MeshRenderer>().bounds.size;
-        
+
+        // Debug.Log($"{boundsSize.x} {boundsSize.y} {boundsSize.z}");
         // Handles.color = color;
         Handles.color = IsAbleToPlaceObject(position, boundsSize) ? Color.green : Color.red;
         Handles.DrawWireCube(position, boundsSize);
@@ -152,13 +192,19 @@ public class LevelBuilder : EditorWindow
 
     private bool CheckRotateClockwiseInput()
     {
-        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.E;
+        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.O;
         return keyPressed;
     }
 
     private bool CheckRotateCounterClockwiseInput()
     {
-        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Q;
+        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.I;
+        return keyPressed;
+    }
+
+    private bool CheckChangeSnapDirectionInput()
+    {
+        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.V;
         return keyPressed;
     }
     
@@ -169,6 +215,17 @@ public class LevelBuilder : EditorWindow
         return Event.current.type == EventType.MouseDown && Event.current.button == 0;
     }
 
+    private void ChangeSnapDirection()
+    {
+        _currentDirectionIndex++;
+        
+        if (_currentDirectionIndex == _directionVectors.Length)
+        {
+            _currentDirectionIndex = 0;
+        }
+
+    }
+
     private void CreateObject(Vector3 position, Vector3 rotation)
     {
         if (_selectedElement < _catalog.Count)
@@ -177,9 +234,9 @@ public class LevelBuilder : EditorWindow
             _createdObject = Instantiate(prefab);
             _createdObject.transform.position = position;
             _createdObject.transform.parent = _parent.transform;
-            _createdObject.layer = _buildingsLayer.value;
+            _createdObject.layer = _parent.layer;
             _createdObject.transform.rotation = Quaternion.Euler(rotation);
-            Debug.Log($"created object rotation: {_createdObject.transform.rotation.x} {_createdObject.transform.rotation.y} {_createdObject.transform.rotation.z}");
+            // Debug.Log($"created object rotation: {_createdObject.transform.rotation.x} {_createdObject.transform.rotation.y} {_createdObject.transform.rotation.z}");
 
             Undo.RegisterCreatedObjectUndo(_createdObject, "Create Building");
         }
@@ -211,7 +268,38 @@ public class LevelBuilder : EditorWindow
         if (_currentRotation.y < -360 || _currentRotation.y > 360)
             _currentRotation.y = 90;
         
-        Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
+        // Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
+    }
+
+    private Vector3 SnapObjectToGridRoadVersion(Vector3 position, Vector3 objectSize, out bool isSnapped)
+    {
+        Vector3 halfBoxSize = objectSize / 2;
+        Collider[] hitColliders = Physics.OverlapBox(position, halfBoxSize);
+        bool isRoadDetected = false;
+        Collider roadCollider = new Collider();
+        
+        foreach (var collider in hitColliders)
+        {
+            if (collider.gameObject.layer == _roadsLayer.value)
+            {
+                isRoadDetected = true;
+                roadCollider = collider;
+                // Debug.Log($"is road detected: {isRoadDetected}");
+                break;
+            }
+        }
+
+        if (isRoadDetected)
+        {
+            // Debug.Log($"{roadCollider.bounds.size.x} {roadCollider.bounds.size.y} {roadCollider.bounds.size.z}");
+            Vector3 newPosition = roadCollider.gameObject.transform.position + _directionVectors[_currentDirectionIndex];
+            // Debug.Log($"new position: {newPosition.x} {newPosition.y} {newPosition.z}");
+            isSnapped = true;
+            return newPosition;
+        }
+
+        isSnapped = false;
+        return position;
     }
 
     private bool IsAbleToPlaceObject(Vector3 position, Vector3 boxSize)
@@ -221,7 +309,7 @@ public class LevelBuilder : EditorWindow
         // Collider[] hitColliders = Physics.OverlapBox(position, boxSize, Quaternion.identity, _buildingsLayer);
         Collider[] hitColliders = Physics.OverlapBox(position, halfBoxSize);
         
-        Debug.Log($"hitCollider: {hitColliders.Length}");
+        // Debug.Log($"hitCollider: {hitColliders.Length}");
         // if (hitColliders.Length > 0 && hitColliders[0].gameObject.layer == _buildingsLayer.value)
         if (hitColliders.Length == 1)
         {
