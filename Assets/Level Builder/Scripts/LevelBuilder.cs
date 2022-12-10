@@ -64,11 +64,8 @@ public class LevelBuilder : EditorWindow
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         _building = GUILayout.Toggle(_building, "Start building", "Button", GUILayout.Height(60));
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        EditorGUILayout.BeginVertical(GUI.skin.window);
-        _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
+
         DrawCatalog(GetCatalogIcons());
-        EditorGUILayout.EndScrollView();
-        EditorGUILayout.EndVertical();
     }
 
     private void OnSceneGUI(SceneView sceneView)
@@ -132,8 +129,22 @@ public class LevelBuilder : EditorWindow
 
     private void DrawCatalog(List<GUIContent> catalogIcons)
     {
+        int gridSizeInPixels = 80;
+        int collumns = (int) (position.width / gridSizeInPixels);
+        int rows = (_catalog.Count / collumns) + 1;
+
         GUILayout.Label("Buildings");
-        _selectedElement = GUILayout.SelectionGrid(_selectedElement, catalogIcons.ToArray(), 4, GUILayout.Width(400), GUILayout.Height(1000));
+
+        _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
+
+        _selectedElement = GUILayout.SelectionGrid
+            (_selectedElement,
+            catalogIcons.ToArray(),
+            collumns,
+            GUILayout.MaxWidth(collumns * gridSizeInPixels),
+            GUILayout.MaxHeight(rows * gridSizeInPixels));
+        
+        EditorGUILayout.EndScrollView();
     }
 
     private List<GUIContent> GetCatalogIcons()
