@@ -14,7 +14,8 @@ public class LevelBuilder : EditorWindow
     private Input _input;
     private RayCaster _rayCaster;
     private Catalog _catalog;
-    private Creation _creation;
+    private Creator _creation;
+    private CurrentObjectEditor _currentObjectEditor;
     private Preview _preview;
 
     private GameObject _createdObject;
@@ -39,8 +40,9 @@ public class LevelBuilder : EditorWindow
         _input = new Input();
         _rayCaster = new RayCaster();
         _catalog = new Catalog();
-        _creation = new Creation(_options, _input, _rayCaster, _catalog, _disposable);
-        _preview = new Preview(this, _options, _rayCaster, _catalog, _disposable);      
+        _currentObjectEditor = new CurrentObjectEditor(_input, _disposable);
+        _creation = new Creator(_options, _input, _rayCaster, _catalog, _currentObjectEditor, _disposable);
+        _preview = new Preview(this, _options, _rayCaster, _catalog, _currentObjectEditor, _disposable);
     }
 
     private void OnEnable()
@@ -102,7 +104,7 @@ public class LevelBuilder : EditorWindow
                 }
             }
         }
-    }    
+    }
 
     public class Options
     {
@@ -132,16 +134,24 @@ public class LevelBuilder : EditorWindow
                 }
             }
         }
-    }            
+    }
     public class Input
     {
         public MouseKey Left { get; private set; } = new MouseKey(0);
-        
+
+        public KeyboardKey Q { get; private set; } = new KeyboardKey(KeyCode.Q);
+        public KeyboardKey E { get; private set; } = new KeyboardKey(KeyCode.E);
+        public KeyboardKey LeftShift { get; private set; } = new KeyboardKey(KeyCode.LeftShift);
+
         public void CheckInputs()
         {
             HandleUtility.AddDefaultControl(0);
 
             Left.CheckInput();
+            
+            Q.CheckInput();
+            E.CheckInput();
+            LeftShift.CheckInput();
         }
 
         public class MouseKey
@@ -191,7 +201,7 @@ public class LevelBuilder : EditorWindow
                 else if (Event.current.keyCode == _keyCode && Event.current.type == EventType.KeyUp)
                 {
                     _keyDown.Value = false;
-                }               
+                }
             }
         }
     }
@@ -318,7 +328,91 @@ public class LevelBuilder : EditorWindow
                     Elements.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject);
             }
         }
-    }    
+    }
+    public class Creator
+    {
+        private readonly Options _options;
+        private readonly Input _input;
+        private readonly RayCaster _rayCaster;
+        private readonly Catalog _catalog;
+        private readonly CurrentObjectEditor _currentObjectEditor;
+
+        public GameObject LastCreatedObject { get; private set; }
+
+        public Creator(Options options, Input input, RayCaster raycaster, Catalog catalog, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        {
+            _options = options;
+            _input = input;
+            _rayCaster = raycaster;
+            _catalog = catalog;
+            _currentObjectEditor = currentObjectEditor;
+
+            _input
+                .Left
+                .KeyDown
+                .Skip(1)
+                .Where(_ => _ == true)
+                .Subscribe(_ => Create(_rayCaster.HitPoint))
+                .AddTo(disposable);
+        }
+
+        private void Create(Vector3 position)
+        {
+            GameObject prefab = _catalog.SelectedElement.Value;
+
+            LastCreatedObject = Instantiate(prefab, position, _currentObjectEditor.Rotation.Value);
+            LastCreatedObject.transform.parent = _options.Parent.transform;
+    
+            Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
+        }
+    }
+    public class CurrentObjectEditor
+    {
+        private readonly Input _input;
+
+        private readonly ReactiveProperty<Quaternion> _rotation = new ReactiveProperty<Quaternion>();
+
+        public CurrentObjectEditor(Input input, CompositeDisposable disposable)
+        {
+            _input = input;
+
+            _input
+                .Q
+                .KeyDown
+                .Skip(1)
+                .Where(_ => _ == true && _input.LeftShift.KeyDown.Value == true)
+                .Subscribe(_ => RotateY(-90))
+                .AddTo(disposable);
+
+            _input
+                .E
+                .KeyDown
+                .Skip(1)
+                .Where(_ => _ == true && _input.LeftShift.KeyDown.Value == true)
+                .Subscribe(_ => RotateY(90))
+                .AddTo(disposable);
+
+            Observable
+                .EveryFixedUpdate()
+                .Skip(1)
+                .Where(_ => _input.LeftShift.KeyDown.Value == false)
+                .Subscribe(_ =>
+                {
+                    if (_input.Q.KeyDown.Value == true)
+                        RotateY(-0.5f);
+                    if (_input.E.KeyDown.Value == true)
+                        RotateY(0.5f);
+                })
+                .AddTo(disposable);
+        }
+
+        public IReadOnlyReactiveProperty<Quaternion> Rotation => _rotation;
+
+        private void RotateY(float angle)
+        {
+            _rotation.Value = Quaternion.Euler(0, _rotation.Value.eulerAngles.y + angle, 0);
+        }
+    }
     public class Preview
     {
         private readonly Options _options;
@@ -327,7 +421,7 @@ public class LevelBuilder : EditorWindow
         private GameObject _preview;
         private MeshRenderer _previewMeshRenderer;
 
-        public Preview(LevelBuilder levelBuilder, Options options, RayCaster rayCaster, Catalog catalog, CompositeDisposable disposable)
+        public Preview(LevelBuilder levelBuilder, Options options, RayCaster rayCaster, Catalog catalog, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
         {
             _options = options;
             _rayCaster = rayCaster;
@@ -337,7 +431,7 @@ public class LevelBuilder : EditorWindow
                 .Skip(1)
                 .Subscribe(_ => ReCreatePreviewGameobject(_))
                 .AddTo(disposable);
-            
+
             levelBuilder
                 ._isEditorActive
                 .Where(_ => _ == false)
@@ -347,7 +441,7 @@ public class LevelBuilder : EditorWindow
                         DestroyImmediate(_preview);
                 })
                 .AddTo(disposable);
-            
+
             levelBuilder
                 ._isInCreationMode
                 .Where(_ => _ == false)
@@ -356,6 +450,13 @@ public class LevelBuilder : EditorWindow
                     if (_preview != null)
                         DestroyImmediate(_preview);
                 })
+                .AddTo(disposable);
+
+            currentObjectEditor
+                .Rotation
+                .Skip(1)
+                .Where(_ => _preview != null)
+                .Subscribe(_ => _preview.transform.rotation = _)
                 .AddTo(disposable);
 
             //Subscribe SetPreviewMaterial to buildAvailability
@@ -392,6 +493,9 @@ public class LevelBuilder : EditorWindow
             _preview.transform.parent = _options.Parent.transform;
             _previewMeshRenderer = _preview.GetComponent<MeshRenderer>();
             _previewMeshRenderer.enabled = false;
+
+            // Change
+            SetPreviewMaterial(true);
         }
         private void SetPreviewMaterial(bool buildAvailability)
         {
@@ -406,53 +510,14 @@ public class LevelBuilder : EditorWindow
 
             void SetMaterial(Material material)
             {
-                int materialsCount = _previewMeshRenderer.materials.Count();
-
-                for (int i = 0; i < materialsCount; i++)
+                Material[] copy = new Material[_previewMeshRenderer.sharedMaterials.Length];
+                
+                for (int i = 0; i < copy.Length; i++)
                 {
-                    _previewMeshRenderer.materials[i] = material;
+                    copy[i] = material;
                 }
+                _previewMeshRenderer.materials = copy;
             }
-        }
-    }
-    public class Creation
-    {
-        private readonly Options _options;
-        private readonly Input _input;
-        private readonly RayCaster _rayCaster;
-        private readonly Catalog _catalog;
-
-        public GameObject LastCreatedObject { get; private set; }
-
-        public Creation(Options options, Input input, RayCaster raycaster, Catalog catalog, CompositeDisposable disposable)
-        {
-            _options = options;
-            _input = input;
-            _rayCaster = raycaster;
-            _catalog = catalog;
-
-            _input
-                .Left
-                .KeyDown
-                .Skip(1)
-                .Where(_ => _ == true)
-                .Subscribe(_ =>
-                {
-                    Debug.Log("cr");
-                    Create(_rayCaster.HitPoint);
-                })
-                .AddTo(disposable);
-
-        }
-
-        private void Create(Vector3 position)
-        {
-            GameObject prefab = _catalog.SelectedElement.Value;
-            LastCreatedObject = Instantiate(prefab);
-            LastCreatedObject.transform.position = position;
-            LastCreatedObject.transform.parent = _options.Parent.transform;
-
-            Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
         }
     }
 }
