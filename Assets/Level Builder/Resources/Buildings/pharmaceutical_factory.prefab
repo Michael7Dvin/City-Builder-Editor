@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6786829920240194215}
   - component: {fileID: 6786829920239391367}
   - component: {fileID: 6786829920238424135}
+  - component: {fileID: 3912425698056987880}
   m_Layer: 0
   m_Name: pharmaceutical_factory
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -88,3 +90,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &3912425698056987880
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6786829920240619143}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.2591698, y: 0.996739, z: 1.7668798}
+  m_Center: {x: -1.0339032, y: 0.4722993, z: 0.034198493}

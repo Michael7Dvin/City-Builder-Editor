@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4284531364843848800}
   - component: {fileID: 4284531364847273024}
   - component: {fileID: 4284531364846143104}
+  - component: {fileID: 8522165920664149482}
   m_Layer: 0
   m_Name: industrial_shop
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -87,3 +89,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &8522165920664149482
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4284531364844148800}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8837128, y: 0.5019612, z: 1.8807712}
+  m_Center: {x: -0.037733644, y: 0.19494328, z: -0.036270767}
