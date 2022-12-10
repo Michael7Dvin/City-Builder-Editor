@@ -1,14 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
 public class LevelBuilder : EditorWindow
 {
-    private const string _pathToBuildings = "Assets/Editor Resources/Buildings";
-    private const string _pathToRoads = "Assets/Editor Resources/Roads";
-    private const string _pathToOther = "Assets/Editor Resources/Other";
+    private const string _groundTilesTabName = "Ground Tiles";
+    private const string _buildingsTabName = "Buildings";
+    private const string _natureTabName = "Nature";
+
+    private const string _pathToGroundTiles = "Assets/Level Builder/Resources/Ground Tiles";
+    private const string _pathToBuildings = "Assets/Level Builder/Resources/Buildings";
+    private const string _pathToNature = "Assets/Level Builder/Resources/Nature";
 
     private Vector2 _scrollPosition;
     private int _selectedElement;
@@ -16,8 +19,13 @@ public class LevelBuilder : EditorWindow
     private bool _building;
 
     private int _selectedTabNumber = 0;
-    private string[] _tabNames = {_pathToBuildings, _pathToRoads, _pathToOther};
-    // private Dictionary<string, string> = new 
+
+    private Dictionary<string, string> _tabs = new Dictionary<string, string>()
+    {
+        {_buildingsTabName, _pathToBuildings},
+        {_groundTilesTabName, _pathToGroundTiles},
+        {_natureTabName, _pathToNature},
+    };
 
     private GameObject _createdObject;
     private GameObject _parent;
@@ -32,7 +40,6 @@ public class LevelBuilder : EditorWindow
     {
         SceneView.duringSceneGui -= OnSceneGUI;
         SceneView.duringSceneGui += OnSceneGUI;
-        // RefreshCatalog();
     }
 
     private void OnGUI()
@@ -50,10 +57,9 @@ public class LevelBuilder : EditorWindow
             createdTransform.localScale = EditorGUILayout.Vector3Field("Position", createdTransform.localScale);
         }
         
-        // RefreshCatalogInFolder(_tabNames[_selectedTabNumber]);
-        _selectedTabNumber = GUILayout.Toolbar(_selectedTabNumber, _tabNames);
+        _selectedTabNumber = GUILayout.Toolbar(_selectedTabNumber, _tabs.Keys.ToArray());
         
-        RefreshCatalogInFolder(_tabNames[_selectedTabNumber]);
+        RefreshCatalogInFolder(_tabs.ElementAt(_selectedTabNumber).Value);
         
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
         _building = GUILayout.Toggle(_building, "Start building", "Button", GUILayout.Height(60));
@@ -71,13 +77,11 @@ public class LevelBuilder : EditorWindow
         {
             if (Raycast(out Vector3 contactPoint))
             {
-                // _createdObject.gameObject.
                 DrawPounter(contactPoint, Color.red);
 
                 if (CheckInput())
                 {
                     CreateObject(contactPoint);
-                    // MeshRenderer meshr = _catalog[_selectedElement].gameObject.GetComponent<MeshRenderer>();
                 }
 
                 sceneView.Repaint();
@@ -118,7 +122,6 @@ public class LevelBuilder : EditorWindow
         if (_selectedElement < _catalog.Count)
         {
             GameObject prefab = _catalog[_selectedElement];
-            //GameObject gameObject = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
             _createdObject = Instantiate(prefab);
             _createdObject.transform.position = position;
             _createdObject.transform.parent = _parent.transform;
@@ -150,14 +153,11 @@ public class LevelBuilder : EditorWindow
     {
         _catalog.Clear();
         Debug.Log(path);
-        // Debug.Log("catalog cleared");
         
         System.IO.Directory.CreateDirectory(path);
         string[] prefabFiles = System.IO.Directory.GetFiles(path, "*.prefab");
         foreach (var prefabFile in prefabFiles)
             _catalog.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject);
-        Debug.Log("catalog added");
-        Debug.Log(_catalog.Count);
     }
 
     private void RefreshCatalog()
