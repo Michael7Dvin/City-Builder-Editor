@@ -1,8 +1,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Numerics;
 using UnityEngine;
 using UnityEditor;
+using Quaternion = UnityEngine.Quaternion;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class LevelBuilder : EditorWindow
 {
@@ -15,6 +19,8 @@ public class LevelBuilder : EditorWindow
     private const string _pathToNature = "Assets/Level Builder/Resources/Nature";
 
     private Vector3 _currentRotation;
+
+    private Vector3 _rotationValueY = new Vector3(0, 90, 0);
     
     private Vector2 _scrollPosition;
     private int _selectedElement;
@@ -49,7 +55,7 @@ public class LevelBuilder : EditorWindow
     {
         _parent = (GameObject)EditorGUILayout.ObjectField("Parent", _parent, typeof(GameObject), true);
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-
+        
         
         if (_createdObject != null)
         {
@@ -79,22 +85,22 @@ public class LevelBuilder : EditorWindow
         if (_building)
         {   
             // _currentRotation = Vector3.zero;
+            // Debug.Log(_selectedElement);
+            if (CheckRotateClockwiseInput())
+            {
+                Debug.Log("Clockwise");
+                RotateOject(_rotationValueY);
+            }
+
+            if (CheckRotateCounterClockwiseInput())
+            {
+                Debug.Log("CounterClockwise");
+                RotateOject(-_rotationValueY);
+            }
             
             if (Raycast(out Vector3 contactPoint))
             {
                 DrawPounter(contactPoint, Color.red);
-
-                if (CheckRotateClockwiseInput())
-                {
-                    _currentRotation += new Vector3(0, 90, 0);
-                    Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
-                }
-
-                if (CheckRotateCounterClockwiseInput())
-                {
-                    _currentRotation -= new Vector3(0, 90, 0);
-                    Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
-                }
                 
                 if (CheckInput())
                 {
@@ -122,9 +128,12 @@ public class LevelBuilder : EditorWindow
 
     private void DrawPounter(Vector3 position, Color color)
     {
+        _catalog[_selectedElement].GetComponent<MeshRenderer>().transform.rotation = Quaternion.Euler(_currentRotation);
         Vector3 boundsSize = _catalog[_selectedElement].GetComponent<MeshRenderer>().bounds.size;
+        
         Handles.color = color;
         Handles.DrawWireCube(position, boundsSize);
+
     }
 
     private bool CheckRotateClockwiseInput()
@@ -160,7 +169,7 @@ public class LevelBuilder : EditorWindow
             Undo.RegisterCreatedObjectUndo(_createdObject, "Create Building");
         }
     }
-
+    
     private void DrawCatalog(List<GUIContent> catalogIcons)
     {
         GUILayout.Label("Buildings");
@@ -178,6 +187,16 @@ public class LevelBuilder : EditorWindow
         }
 
         return catalogIcons;
+    }
+
+    private void RotateOject(Vector3 rotation)
+    {
+        _currentRotation += rotation;
+
+        if (_currentRotation.y < -360 || _currentRotation.y > 360)
+            _currentRotation.y = 90;
+        
+        Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
     }
 
     private void RefreshCatalogInFolder(string path)

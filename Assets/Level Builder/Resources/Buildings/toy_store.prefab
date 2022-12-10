@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 475363645000545557}
   - component: {fileID: 475363644999218485}
   - component: {fileID: 475363644998252533}
+  - component: {fileID: -5874357234400550466}
   m_Layer: 0
   m_Name: toy_store
   m_TagString: Untagged
@@ -28,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,3 +93,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &-5874357234400550466
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475363645000509749}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.59515, y: 0.6330999, z: 1.5430328}
+  m_Center: {x: 0.004636526, y: 0.31654996, z: -0.12087554}
