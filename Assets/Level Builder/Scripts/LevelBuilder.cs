@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using UnityEngine;
 using UnityEditor;
+using UnityEditor.UIElements;
 using Quaternion = UnityEngine.Quaternion;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -20,12 +21,15 @@ public class LevelBuilder : EditorWindow
 
     private Vector3 _currentRotation;
 
-    private Vector3 _rotationValueY = new Vector3(0, 90, 0);
+    private Vector3 _rotationValue = new Vector3(0, 90, 0);
     
     private Vector2 _scrollPosition;
     private int _selectedElement;
+    private Vector3 _selectedElementSize;
     private List<GameObject> _catalog = new List<GameObject>();
     private bool _building;
+    private LayerMask _layerForBuild;
+    private LayerMask _buildingsLayer;
 
     private int _selectedTabNumber = 0;
 
@@ -54,8 +58,11 @@ public class LevelBuilder : EditorWindow
     private void OnGUI()
     {
         _parent = (GameObject)EditorGUILayout.ObjectField("Parent", _parent, typeof(GameObject), true);
+        _layerForBuild = EditorGUILayout.LayerField("Ground Layer", _layerForBuild);
+        _buildingsLayer = EditorGUILayout.LayerField("Buildings Layer", _buildingsLayer);
+        // _buildingsLayer = EditorGUILayout.MaskField("Buildings", _buildingsLayer);
+        //
         EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
-        
         
         if (_createdObject != null)
         {
@@ -84,27 +91,30 @@ public class LevelBuilder : EditorWindow
     {
         if (_building)
         {   
-            // _currentRotation = Vector3.zero;
-            // Debug.Log(_selectedElement);
+            Vector3 boundsSize = _catalog[_selectedElement].GetComponent<MeshRenderer>().bounds.size;
+ 
             if (CheckRotateClockwiseInput())
             {
                 Debug.Log("Clockwise");
-                RotateOject(_rotationValueY);
+                RotateOject(_rotationValue);
             }
 
             if (CheckRotateCounterClockwiseInput())
             {
                 Debug.Log("CounterClockwise");
-                RotateOject(-_rotationValueY);
+                RotateOject(-_rotationValue);
             }
             
             if (Raycast(out Vector3 contactPoint))
             {
-                DrawPounter(contactPoint, Color.red);
+                DrawPounter(contactPoint);
                 
                 if (CheckInput())
                 {
-                    CreateObject(contactPoint, _currentRotation);
+                    if (IsAbleToPlaceObject(contactPoint, boundsSize))
+                    {
+                        CreateObject(contactPoint, _currentRotation);
+                    }
                 }
 
                 sceneView.Repaint();
@@ -117,23 +127,27 @@ public class LevelBuilder : EditorWindow
         Ray guiRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
         contactPoint = Vector3.zero;
 
+        // if (Physics.Raycast(guiRay, out RaycastHit raycastHit))
         if (Physics.Raycast(guiRay, out RaycastHit raycastHit))
         {
             contactPoint = raycastHit.point;
-            return true;
+            if (raycastHit.collider.gameObject.layer == _layerForBuild.value)
+            {
+                return true;
+            }
         }
 
         return false;
     }
 
-    private void DrawPounter(Vector3 position, Color color)
+    private void DrawPounter(Vector3 position)
     {
         _catalog[_selectedElement].GetComponent<MeshRenderer>().transform.rotation = Quaternion.Euler(_currentRotation);
         Vector3 boundsSize = _catalog[_selectedElement].GetComponent<MeshRenderer>().bounds.size;
         
-        Handles.color = color;
+        // Handles.color = color;
+        Handles.color = IsAbleToPlaceObject(position, boundsSize) ? Color.green : Color.red;
         Handles.DrawWireCube(position, boundsSize);
-
     }
 
     private bool CheckRotateClockwiseInput()
@@ -163,6 +177,7 @@ public class LevelBuilder : EditorWindow
             _createdObject = Instantiate(prefab);
             _createdObject.transform.position = position;
             _createdObject.transform.parent = _parent.transform;
+            _createdObject.layer = _buildingsLayer.value;
             _createdObject.transform.rotation = Quaternion.Euler(rotation);
             Debug.Log($"created object rotation: {_createdObject.transform.rotation.x} {_createdObject.transform.rotation.y} {_createdObject.transform.rotation.z}");
 
@@ -197,6 +212,23 @@ public class LevelBuilder : EditorWindow
             _currentRotation.y = 90;
         
         Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
+    }
+
+    private bool IsAbleToPlaceObject(Vector3 position, Vector3 boxSize)
+    {
+        Vector3 halfBoxSize = boxSize / 2;
+        // Collider[] hitColliders = Physics.OverlapBox(position, halfBoxSize, Quaternion.identity, _buildingsLayer.value);
+        // Collider[] hitColliders = Physics.OverlapBox(position, boxSize, Quaternion.identity, _buildingsLayer);
+        Collider[] hitColliders = Physics.OverlapBox(position, halfBoxSize);
+        
+        Debug.Log($"hitCollider: {hitColliders.Length}");
+        // if (hitColliders.Length > 0 && hitColliders[0].gameObject.layer == _buildingsLayer.value)
+        if (hitColliders.Length == 1)
+        {
+            return true;
+        }
+        
+        return false;
     }
 
     private void RefreshCatalogInFolder(string path)
