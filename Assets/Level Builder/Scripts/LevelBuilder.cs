@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 using UnityEditor;
@@ -13,6 +14,8 @@ public class LevelBuilder : EditorWindow
     private const string _pathToBuildings = "Assets/Level Builder/Resources/Buildings";
     private const string _pathToNature = "Assets/Level Builder/Resources/Nature";
 
+    private Vector3 _currentRotation;
+    
     private Vector2 _scrollPosition;
     private int _selectedElement;
     private List<GameObject> _catalog = new List<GameObject>();
@@ -53,8 +56,8 @@ public class LevelBuilder : EditorWindow
             EditorGUILayout.LabelField("Created Object Settings");
             Transform createdTransform = _createdObject.transform;
             createdTransform.position = EditorGUILayout.Vector3Field("Position", createdTransform.position);
-            createdTransform.rotation = Quaternion.Euler(EditorGUILayout.Vector3Field("Position", createdTransform.rotation.eulerAngles));
-            createdTransform.localScale = EditorGUILayout.Vector3Field("Position", createdTransform.localScale);
+            createdTransform.rotation = Quaternion.Euler(EditorGUILayout.Vector3Field("Rotation", createdTransform.rotation.eulerAngles));
+            createdTransform.localScale = EditorGUILayout.Vector3Field("Scale", createdTransform.localScale);
         }
         
         _selectedTabNumber = GUILayout.Toolbar(_selectedTabNumber, _tabs.Keys.ToArray());
@@ -74,14 +77,28 @@ public class LevelBuilder : EditorWindow
     private void OnSceneGUI(SceneView sceneView)
     {
         if (_building)
-        {
+        {   
+            // _currentRotation = Vector3.zero;
+            
             if (Raycast(out Vector3 contactPoint))
             {
                 DrawPounter(contactPoint, Color.red);
 
+                if (CheckRotateClockwiseInput())
+                {
+                    _currentRotation += new Vector3(0, 90, 0);
+                    Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
+                }
+
+                if (CheckRotateCounterClockwiseInput())
+                {
+                    _currentRotation -= new Vector3(0, 90, 0);
+                    Debug.Log($"current rotation X: {_currentRotation.x} Y: {_currentRotation.y} Z: {_currentRotation.z}");
+                }
+                
                 if (CheckInput())
                 {
-                    CreateObject(contactPoint);
+                    CreateObject(contactPoint, _currentRotation);
                 }
 
                 sceneView.Repaint();
@@ -110,6 +127,18 @@ public class LevelBuilder : EditorWindow
         Handles.DrawWireCube(position, boundsSize);
     }
 
+    private bool CheckRotateClockwiseInput()
+    {
+        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.E;
+        return keyPressed;
+    }
+
+    private bool CheckRotateCounterClockwiseInput()
+    {
+        bool keyPressed = Event.current.type == EventType.KeyDown && Event.current.keyCode == KeyCode.Q;
+        return keyPressed;
+    }
+    
     private bool CheckInput()
     {
         HandleUtility.AddDefaultControl(0);
@@ -117,7 +146,7 @@ public class LevelBuilder : EditorWindow
         return Event.current.type == EventType.MouseDown && Event.current.button == 0;
     }
 
-    private void CreateObject(Vector3 position)
+    private void CreateObject(Vector3 position, Vector3 rotation)
     {
         if (_selectedElement < _catalog.Count)
         {
@@ -125,6 +154,8 @@ public class LevelBuilder : EditorWindow
             _createdObject = Instantiate(prefab);
             _createdObject.transform.position = position;
             _createdObject.transform.parent = _parent.transform;
+            _createdObject.transform.rotation = Quaternion.Euler(rotation);
+            Debug.Log($"created object rotation: {_createdObject.transform.rotation.x} {_createdObject.transform.rotation.y} {_createdObject.transform.rotation.z}");
 
             Undo.RegisterCreatedObjectUndo(_createdObject, "Create Building");
         }
@@ -152,7 +183,7 @@ public class LevelBuilder : EditorWindow
     private void RefreshCatalogInFolder(string path)
     {
         _catalog.Clear();
-        Debug.Log(path);
+        // Debug.Log(path);
         
         System.IO.Directory.CreateDirectory(path);
         string[] prefabFiles = System.IO.Directory.GetFiles(path, "*.prefab");
