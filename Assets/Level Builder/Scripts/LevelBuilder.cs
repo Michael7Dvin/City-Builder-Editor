@@ -152,10 +152,10 @@ public class LevelBuilder : EditorWindow
     private void RefreshCatalogInFolder(string path)
     {
         _catalog.Clear();
-        Debug.Log(path);
         
         System.IO.Directory.CreateDirectory(path);
         string[] prefabFiles = System.IO.Directory.GetFiles(path, "*.prefab");
+
         foreach (var prefabFile in prefabFiles)
             _catalog.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject);
     }
