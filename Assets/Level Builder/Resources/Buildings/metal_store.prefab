@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5439804212550378179}
   - component: {fileID: 5439804212549279747}
   - component: {fileID: -8403688875612224713}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: metal_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}

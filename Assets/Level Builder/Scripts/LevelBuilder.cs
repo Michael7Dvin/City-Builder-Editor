@@ -39,10 +39,10 @@ public class LevelBuilder : EditorWindow
         await new WaitUntil(() => _options.IsOptionsApplied.Value == true);
 
         _input = new Input();
-        _rayCaster = new RayCaster();
+        _rayCaster = new RayCaster(_options);
         _catalog = new Catalog();
         _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
-        _createAvailability = new CreateAvailability(_currentObjectEditor, _rayCaster);
+        _createAvailability = new CreateAvailability(_options, _currentObjectEditor, _rayCaster);
         _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _disposable);
         _preview = new Preview(this, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
     }
@@ -120,6 +120,10 @@ public class LevelBuilder : EditorWindow
         public Material BuildAllowed { get; private set; }
         public Material BuildDisallowed { get; private set; }
 
+        public LayerMask GroundLayer{ get; private set; }
+        public LayerMask BuildingsLayer { get; private set; }
+      
+
         public void Draw()
         {
             EditorGUILayout.LabelField("Set up");
@@ -129,9 +133,12 @@ public class LevelBuilder : EditorWindow
             BuildAllowed = (Material)EditorGUILayout.ObjectField("Build Allowed Material", BuildAllowed, typeof(Material), true);
             BuildDisallowed = (Material)EditorGUILayout.ObjectField("Build Disallowed Material", BuildDisallowed, typeof(Material), true);
 
+            GroundLayer = EditorGUILayout.LayerField("Ground Layer", GroundLayer);
+            BuildingsLayer = EditorGUILayout.LayerField("Buildings Layer", BuildingsLayer);
+
             if (GUILayout.Button("Apply"))
             {
-                if (Parent != null && BuildAllowed != null && BuildDisallowed != null)
+                if (Parent != null && BuildAllowed != null && BuildDisallowed != null && GroundLayer.value != 0 && BuildingsLayer.value != 0)
                 {
                     _isOptionsApplied.Value = true;
                 }
@@ -210,6 +217,13 @@ public class LevelBuilder : EditorWindow
     }
     public class RayCaster
     {
+        private readonly Options _options;
+
+        public RayCaster(Options options)
+        {
+            _options = options;
+        }
+
         public Vector3 HitPoint { get; private set; }
         public GameObject HitGround { get; private set; }
 
@@ -222,11 +236,11 @@ public class LevelBuilder : EditorWindow
             HitPoint = Vector3.zero;
             HitGround = null;
 
-            if (Physics.Raycast(guiRay, out RaycastHit raycastHit))
+            if (Physics.Raycast(guiRay, out RaycastHit raycastHit, Mathf.Infinity, 1 << _options.GroundLayer.value))
             {
                 HitPoint = raycastHit.point;
                 HitGround = raycastHit.collider.gameObject;
-                return true;
+                return true;               
             }
 
             return false;
@@ -334,13 +348,15 @@ public class LevelBuilder : EditorWindow
     }
     public class CreateAvailability
     {
+        private readonly Options _options;
         private readonly CurrentObjectEditor _currentObjectEditor;
-        private readonly RayCaster _rayCaster = new RayCaster();
+        private readonly RayCaster _rayCaster;
 
         private readonly ReactiveProperty<bool> _availability = new ReactiveProperty<bool>();
 
-        public CreateAvailability(CurrentObjectEditor currentObjectEditor, RayCaster rayCaster)
+        public CreateAvailability(Options options, CurrentObjectEditor currentObjectEditor, RayCaster rayCaster)
         {
+            _options = options;
             _currentObjectEditor = currentObjectEditor;
             _rayCaster = rayCaster;
         }
@@ -355,7 +371,7 @@ public class LevelBuilder : EditorWindow
         private bool IsOverlapOtherObjects()
         {
             Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
-            Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize);
+            Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize, Quaternion.identity, 1 << _options.BuildingsLayer.value);
 
             if (hitColliders.Length == 1)
             {

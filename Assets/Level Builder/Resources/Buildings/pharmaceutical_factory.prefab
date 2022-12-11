@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6786829920239391367}
   - component: {fileID: 6786829920238424135}
   - component: {fileID: 3912425698056987880}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pharmaceutical_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

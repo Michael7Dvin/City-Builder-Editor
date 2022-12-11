@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7261635672464182509}
   - component: {fileID: 7261635672465280557}
   - component: {fileID: 230576560850380258}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: power_plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3888294540219816601}
   - component: {fileID: 3888294540220946521}
   - component: {fileID: 2113804667521815476}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: pharmacy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

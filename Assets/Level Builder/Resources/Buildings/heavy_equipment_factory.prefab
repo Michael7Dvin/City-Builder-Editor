@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7097314624458705687}
   - component: {fileID: 7097314624459672023}
   - component: {fileID: -1715274492637214060}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: heavy_equipment_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

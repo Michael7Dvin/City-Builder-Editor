@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7084698308896166487}
   - component: {fileID: 7084698308895068311}
   - component: {fileID: 7900311445831455440}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: furniture_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}

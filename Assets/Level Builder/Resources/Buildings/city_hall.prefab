@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5836419166775202293}
   - component: {fileID: 5836419166776300341}
   - component: {fileID: -5694293205138857290}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: city_hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}

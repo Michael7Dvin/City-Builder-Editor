@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6393301795095905535}
   - component: {fileID: 6393301795096905279}
   - component: {fileID: 2952957377667467824}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chemical_store (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

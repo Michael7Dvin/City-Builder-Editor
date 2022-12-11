@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4919877152337852017}
   - component: {fileID: 4919877152338949297}
   - component: {fileID: -1422048174738685250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: cosmetic_laboratory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

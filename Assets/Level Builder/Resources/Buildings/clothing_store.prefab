@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6328802479985191072}
   - component: {fileID: 6328802479986289248}
   - component: {fileID: -2604102147610981160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: clothing_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6328802479984293024}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.17796029, z: 0, w: -0.9840377}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.7091538, z: 1}
   m_ConstrainProportionsScale: 0
