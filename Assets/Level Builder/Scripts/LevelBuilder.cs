@@ -5,6 +5,8 @@ using UnityEditor;
 using UniRx;
 using Cysharp.Threading.Tasks;
 using System;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
+using UnityEngine.UIElements;
 
 public class LevelBuilder : EditorWindow
 {
@@ -350,6 +352,14 @@ public class LevelBuilder : EditorWindow
         private readonly CurrentObjectEditor _currentObjectEditor;
         private readonly RayCaster _rayCaster;
 
+        private readonly Vector3[] _directionVectors = new[]
+        {
+            Vector3.forward,
+            Vector3.right,
+            Vector3.back,
+            Vector3.left,
+        };
+
         private readonly ReactiveProperty<bool> _availability = new ReactiveProperty<bool>();
 
         public CreateAvailability(Options options, CurrentObjectEditor currentObjectEditor, RayCaster rayCaster)
@@ -377,6 +387,27 @@ public class LevelBuilder : EditorWindow
             }
 
             return true;
+        }
+
+        private bool IsOverlapRoadTile()
+        {
+            Vector3 cursorPosition = new Vector3();
+            Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
+            Collider[] hitColliders = Physics.OverlapBox(cursorPosition, halfBoxSize);
+            bool isRoadDetected = false;
+            Collider roadCollider = new Collider();
+
+            foreach (var collider in hitColliders)
+            {
+                // if (collider.GetComponent<Road>()) -- расскомментировать есть ли есть пустышка Road
+                {
+                    isRoadDetected = true;
+                    roadCollider = collider;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
     public class Creator
