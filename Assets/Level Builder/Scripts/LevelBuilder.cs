@@ -279,11 +279,11 @@ public class LevelBuilder : EditorWindow
         public void Draw(Rect editorWindowPosition)
         {
             EditorGUILayout.HelpBox("LMB - build object" +
-                                    "Q - rotate counterclockwise " +
+                                    "\nQ - rotate counterclockwise " +
                                     "\nE - rotate clockwise " +
                                     "\nLeft Shift + Q - rotate by 90 degrees counterclockwise" +
                                     "\nLeft Shift + E - rotate by 90 degrees clockwise" +
-                                    "Note: ground objects are stick to each other", MessageType.Info);
+                                    "\nNote: ground objects are stick to each other", MessageType.Info);
             _selectedTabNumber = GUILayout.Toolbar(_selectedTabNumber, _tabs.Keys.ToArray());
 
             _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
