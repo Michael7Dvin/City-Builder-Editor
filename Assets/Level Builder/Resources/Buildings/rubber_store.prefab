@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1383210388689799903}
   - component: {fileID: 1383210388688799775}
   - component: {fileID: -8071313176168038268}
+  - component: {fileID: 8978905562758155762}
   m_Layer: 0
   m_Name: rubber_store
   m_TagString: Untagged
@@ -102,3 +103,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.8319366, y: 0.66521305, z: 1.8780429}
   m_Center: {x: 0.025172085, y: 0.33260652, z: 0.048225254}
+--- !u!114 &8978905562758155762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383210388686870239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

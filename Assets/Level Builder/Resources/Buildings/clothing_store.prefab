@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6328802479985191072}
   - component: {fileID: 6328802479986289248}
   - component: {fileID: 5623575938826685045}
+  - component: {fileID: 4342155068548200183}
   m_Layer: 0
   m_Name: clothing_store
   m_TagString: Untagged
@@ -104,3 +105,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6560602, y: 1.6585339, z: 1.6168869}
   m_Center: {x: 0.020563364, y: 0.82926697, z: -0.009456396}
+--- !u!114 &4342155068548200183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6328802479984293024}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

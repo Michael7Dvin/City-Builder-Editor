@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3510261795443825291}
   - component: {fileID: 3510261795444791371}
   - component: {fileID: -581070741371961593}
+  - component: {fileID: -7056634103747386185}
   m_Layer: 0
   m_Name: sports_equipment_factory
   m_TagString: Untagged
@@ -106,3 +107,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.7038205, y: 0.5881048, z: 3.5585659}
   m_Center: {x: -0.9215828, y: 0.2940524, z: 0.9496211}
+--- !u!114 &-7056634103747386185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510261795446982283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 336517753408819422}
   - component: {fileID: 336517753409819166}
   - component: {fileID: 6259629928959196085}
+  - component: {fileID: -857921945165150830}
   m_Layer: 0
   m_Name: sawmill
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.690126, y: 0.40909582, z: 1.6804771}
   m_Center: {x: 0.028287776, y: 0.20454791, z: -0.030137189}
+--- !u!114 &-857921945165150830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336517753411751134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

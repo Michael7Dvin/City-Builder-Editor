@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4919877152337852017}
   - component: {fileID: 4919877152338949297}
   - component: {fileID: 6947535237738152252}
+  - component: {fileID: -5642007549521508495}
   m_Layer: 0
   m_Name: cosmetic_laboratory
   m_TagString: Untagged
@@ -103,3 +104,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.7880273, y: 0.8379101, z: 1.864651}
   m_Center: {x: -1.0140526, y: 0.41895506, z: 0.040910155}
+--- !u!114 &-5642007549521508495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4919877152337013361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

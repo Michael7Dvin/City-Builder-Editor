@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2798051195055320410}
   - component: {fileID: 2798051195056320410}
   - component: {fileID: 2744260886800893442}
+  - component: {fileID: -4124856006766974410}
   m_Layer: 0
   m_Name: appliances_factory
   m_TagString: Untagged
@@ -102,3 +103,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.625919, y: 0.91840774, z: 3.5307984}
   m_Center: {x: -1.0021683, y: 0.45920387, z: 1.0054908}
+--- !u!114 &-4124856006766974410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2798051195054387546}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6722751710494033212}
   - component: {fileID: 6722751710495033340}
   - component: {fileID: -2999881874721719450}
+  - component: {fileID: -2334387648071830598}
   m_Layer: 0
   m_Name: video_games_store
   m_TagString: Untagged
@@ -102,3 +103,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.5924761, y: 1.1074886, z: 1.4603608}
   m_Center: {x: 0, y: 0.5537443, z: -0.06605071}
+--- !u!114 &-2334387648071830598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6722751710493038908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

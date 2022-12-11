@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4158543336640713791}
   - component: {fileID: 4158543336641713919}
   - component: {fileID: 1475287169725901575}
+  - component: {fileID: 52092406748533787}
   m_Layer: 0
   m_Name: sewing
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.6923838, y: 0.7667435, z: 2.8225226}
   m_Center: {x: -0.96137524, y: 0.34379235, z: 0.76443154}
+--- !u!114 &52092406748533787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4158543336643905599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
