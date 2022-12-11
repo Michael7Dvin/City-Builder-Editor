@@ -389,25 +389,6 @@ public class LevelBuilder : EditorWindow
 
             return false;
         }
-
-        //private bool IsOverlapRoadTile()
-        //{
-        //    Collider ground = _rayCaster.HitGroundObject.GetComponent<Collider>();
-
-        //    Vector3 halfBoxSize = _currentObjectEditor.Object.GetComponent<MeshRenderer>().bounds.size / 2;
-        //    Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize);
-
-        //    foreach (var collider in hitColliders)
-        //    {
-        //        if (collider.GetComponent<Ground>())
-        //        {
-        //            ground = collider;
-        //            return true;
-        //        }
-        //    }
-
-        //    return false;
-        //}
     }
     public class Creator
     {
