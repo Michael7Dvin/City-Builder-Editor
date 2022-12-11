@@ -392,14 +392,14 @@ public class LevelBuilder : EditorWindow
         private bool IsOverlapRoadTile()
         {
             Vector3 cursorPosition = new Vector3();
-            Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
+            Vector3 halfBoxSize = _currentObjectEditor.Object.GetComponent<MeshRenderer>().bounds.size / 2;
             Collider[] hitColliders = Physics.OverlapBox(cursorPosition, halfBoxSize);
             bool isRoadDetected = false;
             Collider roadCollider = new Collider();
 
             foreach (var collider in hitColliders)
             {
-                // if (collider.GetComponent<Road>()) -- расскомментировать есть ли есть пустышка Road
+                if (collider.GetComponent<Ground>())
                 {
                     isRoadDetected = true;
                     roadCollider = collider;
