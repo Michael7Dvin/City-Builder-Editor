@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 608495588969277653}
   - component: {fileID: -1848958750866149945}
   - component: {fileID: -666502291449974383}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: chemical_laboratory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

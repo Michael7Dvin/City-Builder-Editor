@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4952351175054808896}
   - component: {fileID: -208261967593229319}
   - component: {fileID: -4371618179939187002}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: appliances_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}

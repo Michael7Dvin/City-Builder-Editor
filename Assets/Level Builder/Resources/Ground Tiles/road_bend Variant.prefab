@@ -21,7 +21,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9f810b2af6f9ca46881646a4a6245bd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.405305
+      value: -11.405304
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b9f810b2af6f9ca46881646a4a6245bd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -54,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b9f810b2af6f9ca46881646a4a6245bd, type: 3}
       propertyPath: m_Name
       value: road_bend Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b9f810b2af6f9ca46881646a4a6245bd, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9f810b2af6f9ca46881646a4a6245bd, type: 3}

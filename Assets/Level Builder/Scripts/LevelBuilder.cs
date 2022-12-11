@@ -151,7 +151,7 @@ public class LevelBuilder : EditorWindow
 
         public KeyboardKey Q { get; private set; } = new KeyboardKey(KeyCode.Q);
         public KeyboardKey E { get; private set; } = new KeyboardKey(KeyCode.E);
-        public KeyboardKey LeftShift { get; private set; } = new KeyboardKey(KeyCode.LeftShift);
+        public KeyboardKey LeftShift { get; private set; } = new KeyboardKey(KeyCode.L);
 
         public void CheckInputs()
         {
@@ -278,6 +278,12 @@ public class LevelBuilder : EditorWindow
 
         public void Draw(Rect editorWindowPosition)
         {
+            EditorGUILayout.HelpBox("LMB - build object" +
+                                    "Q - rotate counterclockwise " +
+                                    "\nE - rotate clockwise " +
+                                    "\nLeft Shift + Q - rotate by 90 degrees counterclockwise" +
+                                    "\nLeft Shift + E - rotate by 90 degrees clockwise" +
+                                    "Note: ground objects are stick to each other", MessageType.Info);
             _selectedTabNumber = GUILayout.Toolbar(_selectedTabNumber, _tabs.Keys.ToArray());
 
             _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
@@ -375,10 +381,10 @@ public class LevelBuilder : EditorWindow
 
             if (hitColliders.Length == 1)
             {
-                return false;
+                return true;
             }
 
-            return true;
+            return false;
         }
 
         //private bool IsOverlapRoadTile()
@@ -506,8 +512,6 @@ public class LevelBuilder : EditorWindow
                                 break;
                             }
                     }
-
-
                 })
                 .AddTo(disposable);
 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 722035846367766352}
   - component: {fileID: -7920390097540912919}
   - component: {fileID: 2310050922106703147}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: bookstore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722035846370032016}
   m_LocalRotation: {x: 0, y: 0.7223647, z: 0, w: -0.6915123}
-  m_LocalPosition: {x: 12.280964, y: 4.500677, z: 12.007754}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.70656496, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

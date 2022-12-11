@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6671140809168972594}
   - component: {fileID: 5416183151605724687}
   - component: {fileID: -9035318853201660324}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: furniture_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

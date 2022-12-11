@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6165051399204085075}
   - component: {fileID: -7810167625536451949}
   - component: {fileID: -9221200579457128701}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: police_academy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

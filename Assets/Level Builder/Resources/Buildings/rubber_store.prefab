@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1383210388688799775}
   - component: {fileID: -8071313176168038268}
   - component: {fileID: 8978905562758155762}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: rubber_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7084698308895068311}
   - component: {fileID: 7247964067241702156}
   - component: {fileID: -3953158213207641885}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: furniture_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7084698308897328727}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 7.781466, y: 4.6099997, z: -9.76359}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

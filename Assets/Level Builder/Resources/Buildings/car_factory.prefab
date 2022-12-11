@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7855706653615280469}
   - component: {fileID: 6081118861214499531}
   - component: {fileID: 587956970632919723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: car_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7855706653613346709}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.2168503, y: 4.6099997, z: -9.381176}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

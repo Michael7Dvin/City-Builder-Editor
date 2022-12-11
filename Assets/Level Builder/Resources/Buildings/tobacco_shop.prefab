@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4573349432109783311}
   - component: {fileID: 1562284742662508608}
   - component: {fileID: -2910605584710299064}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: tobacco_shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}

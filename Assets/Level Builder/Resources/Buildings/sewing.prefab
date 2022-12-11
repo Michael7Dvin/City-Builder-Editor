@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4158543336641713919}
   - component: {fileID: 1475287169725901575}
   - component: {fileID: 52092406748533787}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sewing
   m_TagString: Untagged
   m_Icon: {fileID: 0}

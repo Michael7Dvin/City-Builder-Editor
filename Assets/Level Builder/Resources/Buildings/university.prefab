@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2421350580508517640}
   - component: {fileID: -633708556344382868}
   - component: {fileID: -5159022206929414866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: university
   m_TagString: Untagged
   m_Icon: {fileID: 0}

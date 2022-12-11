@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2798051195056320410}
   - component: {fileID: 2744260886800893442}
   - component: {fileID: -4124856006766974410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: appliances_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}

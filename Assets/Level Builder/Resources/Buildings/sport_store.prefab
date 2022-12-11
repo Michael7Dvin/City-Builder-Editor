@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5812994813908928265}
   - component: {fileID: -7089218797992501811}
   - component: {fileID: 1837517707893441114}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: sport_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
