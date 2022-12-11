@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8ac3ee6f-a99a-4fd9-a0e3-41aaef13c2e7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Assets/Editor Resources.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Editor Resources/Buildings.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Editor Resources/Ground Tiles.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Editor Resources/Other.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Editor Resources/Roads.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/appliances_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/appliances_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/appliances_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/appliances_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/bookstore.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/bookstore.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/car_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/car_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/car_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/car_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_laboratory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_laboratory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_store (1).prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_store (1).prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/chemical_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cinema.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cinema.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/city_hall.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/city_hall.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/clothing_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/clothing_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/computer_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/computer_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cosmetic_laboratory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cosmetic_laboratory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cosmetic_shop.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/cosmetic_shop.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/electronic_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/electronic_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/electronics_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/electronics_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/food_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/food_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/furniture_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/furniture_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/furniture_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/furniture_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/grocery_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/grocery_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/guard.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/guard.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/heavy_equipment_factory.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/heavy_equipment_factory.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/heavy_equipment_store.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/heavy_equipment_store.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_2.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_3.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_3.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_4.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Other/house_2_v_4.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/appliances_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/appliances_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/appliances_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/appliances_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/bookstore.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/bookstore.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/car_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/car_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/car_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/car_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_laboratory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_laboratory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_store (1).prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_store (1).prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/chemical_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cinema.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cinema.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/city_hall.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/city_hall.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/clothing_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/clothing_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/computer_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/computer_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cosmetic_laboratory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cosmetic_laboratory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cosmetic_shop.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/cosmetic_shop.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/electronic_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/electronic_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/electronics_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/electronics_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/food_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/food_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/furniture_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/furniture_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/furniture_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/furniture_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/grocery_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/grocery_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/guard.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/guard.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/heavy_equipment_factory.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/heavy_equipment_factory.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/heavy_equipment_store.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/heavy_equipment_store.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_1.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_1.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_2.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_2.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_3.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_3.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_4.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Level Builder/Level Builder Resources/Buildings/house_2_v_4.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2IiXr3IhPO1rn6epcLJZQ6M4lnc" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Discover.Launch.Via.Unity" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="rider.run.widget.enabled.cache" value="false" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+    <configuration name="Attach to Unity Editor &amp; Play" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="UNITY_ATTACH_AND_PLAY" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+      <option name="allowRunningInParallel" value="false" />
+      <option name="listenPortForConnections" value="false" />
+      <option name="pid" />
+      <option name="projectPathOnTarget" />
+      <option name="selectedOptions">
+        <list />
+      </option>
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8ac3ee6f-a99a-4fd9-a0e3-41aaef13c2e7" name="Changes" comment="" />
+      <created>1670665580703</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1670665580703</updated>
+      <workItem from="1670665582385" duration="25624000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+</project>

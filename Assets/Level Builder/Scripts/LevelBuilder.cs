@@ -43,7 +43,7 @@ public class LevelBuilder : EditorWindow
         _catalog = new Catalog();
         _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
         _createAvailability = new CreateAvailability(_options, _currentObjectEditor, _rayCaster);
-        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _disposable);
+        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _createAvailability,_disposable);
         _preview = new Preview(this, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
     }
 
@@ -151,7 +151,7 @@ public class LevelBuilder : EditorWindow
 
         public KeyboardKey Q { get; private set; } = new KeyboardKey(KeyCode.Q);
         public KeyboardKey E { get; private set; } = new KeyboardKey(KeyCode.E);
-        public KeyboardKey LeftShift { get; private set; } = new KeyboardKey(KeyCode.LeftShift);
+        public KeyboardKey LeftShift { get; private set; } = new KeyboardKey(KeyCode.L);
 
         public void CheckInputs()
         {
@@ -372,8 +372,9 @@ public class LevelBuilder : EditorWindow
         {
             Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
             Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize, Quaternion.identity, 1 << _options.BuildingsLayer.value);
+            // Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize, Quaternion.identity, 1 << _options.GroundLayer.value);
 
-            if (hitColliders.Length == 1)
+            if (hitColliders.Length == 1) // == 1
             {
                 return true;
             }
@@ -388,15 +389,17 @@ public class LevelBuilder : EditorWindow
         private readonly RayCaster _rayCaster;
         private readonly Catalog _catalog;
         private readonly CurrentObjectEditor _currentObjectEditor;
+        private readonly CreateAvailability _availabilityChecker;
 
         public GameObject LastCreatedObject { get; private set; }
 
-        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CreateAvailability createAvailability,CompositeDisposable disposable)
         {
             _options = options;
             _input = input;
             _rayCaster = raycaster;
             _currentObjectEditor = currentObjectEditor;
+            _availabilityChecker = createAvailability;
 
             _input
                 .Left
@@ -409,10 +412,13 @@ public class LevelBuilder : EditorWindow
 
         private void Create(Vector3 position)
         {
-            LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
-            LastCreatedObject.transform.parent = _options.Parent.transform;
+            if (_availabilityChecker.Availability.Value)
+            {
+                LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
+                LastCreatedObject.transform.parent = _options.Parent.transform;
       
-            Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
+                Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
+            }
         }
     }
     public class CurrentObjectEditor
