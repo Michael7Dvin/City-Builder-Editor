@@ -47,9 +47,9 @@ public class LevelBuilder : EditorWindow
         _input = new Input();
         _rayCaster = new RayCaster(_options);
         _catalog = new Catalog();
-        _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
+        _currentObjectEditor = new CurrentObjectEditor(_input, _rayCaster, _catalog, _disposable);
         _createAvailability = new CreateAvailability(_options, _currentObjectEditor, _rayCaster);
-        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _createAvailability, _disposable);
+        _creation = new Creator(_options, _input, _currentObjectEditor, _createAvailability, _disposable);
         _preview = new Preview(_status, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
 
         _status.Value |= LevelBuilderStatus.OpionsApplied;
@@ -383,17 +383,15 @@ public class LevelBuilder : EditorWindow
     {
         private readonly Options _options;
         private readonly Input _input;
-        private readonly RayCaster _rayCaster;
         private readonly CurrentObjectEditor _currentObjectEditor;
         private readonly CreateAvailability _availabilityChecker;
 
         public Buildable LastCreatedObject { get; private set; }
 
-        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CreateAvailability createAvailability, CompositeDisposable disposable)
+        public Creator(Options options, Input input, CurrentObjectEditor currentObjectEditor, CreateAvailability createAvailability, CompositeDisposable disposable)
         {
             _options = options;
             _input = input;
-            _rayCaster = raycaster;
             _currentObjectEditor = currentObjectEditor;
             _availabilityChecker = createAvailability;
 
@@ -402,7 +400,7 @@ public class LevelBuilder : EditorWindow
                 .KeyDown
                 .Skip(1)
                 .Where(_ => _ == true)
-                .Subscribe(_ => Create(_rayCaster.HitPoint))
+                .Subscribe(_ => Create(currentObjectEditor.Object.transform.position))
                 .AddTo(disposable);
         }
 
@@ -423,7 +421,7 @@ public class LevelBuilder : EditorWindow
 
         public Buildable Object { get; private set; }
 
-        public CurrentObjectEditor(Input input, Catalog catalog, CompositeDisposable disposable)
+        public CurrentObjectEditor(Input input, RayCaster rayCaster, Catalog catalog, CompositeDisposable disposable)
         {
             _input = input;
 
@@ -449,6 +447,8 @@ public class LevelBuilder : EditorWindow
                 .Where(_ => _input.LeftShift.KeyDown.Value == false)
                 .Subscribe(_ =>
                 {
+                    Object.transform.position = rayCaster.HitPoint;
+
                     if (_input.Q.KeyDown.Value == true)
                         RotateY(-0.5f);
                     if (_input.E.KeyDown.Value == true)
@@ -509,17 +509,17 @@ public class LevelBuilder : EditorWindow
         {
             if (_rayCaster.IsHitGround == true)
             {
-                DrawPreview(_rayCaster.HitPoint);
+                DrawPreview(_currentObjectEditor.Object.transform.position);
                 sceneView.Repaint();
             }
         }
 
-        private void DrawPreview(Vector3 mousePosition)
+        private void DrawPreview(Vector3 postition)
         {
             if (_preview != null)
             {
                 _previewMeshRenderer.enabled = true;
-                _preview.transform.position = mousePosition;
+                _preview.transform.position = postition;
                 _preview.transform.rotation = _currentObjectEditor.Object.transform.rotation;
             }
         }
