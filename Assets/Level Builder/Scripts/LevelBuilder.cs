@@ -464,26 +464,50 @@ public class LevelBuilder : EditorWindow
                 .Subscribe(_ => RotateY(90))
                 .AddTo(disposable);
 
+            _input
+                .Q
+                .KeyDown
+                .Skip(1)
+                .Where(_ => _ == true && _input.LeftShift.KeyDown.Value == false)
+                .Subscribe(_ => ChangeStickDirection(-1))
+                .AddTo(disposable);
+
+            _input
+                .E
+                .KeyDown
+                .Skip(1)
+                .Where(_ => _ == true && _input.LeftShift.KeyDown.Value == false)
+                .Subscribe(_ => ChangeStickDirection(1))
+                .AddTo(disposable);            
+            
+
             Observable
                 .EveryFixedUpdate()
-                .Skip(1)
-                .Where(_ => _input.LeftShift.KeyDown.Value == false)
                 .Subscribe(_ =>
                 {
                     switch (Object.Type)
                     {
                         case BuildingType.House:
-                            Object.transform.position = rayCaster.HitPoint;
-                            break;
+                            {
+                                if (input.LeftShift.KeyDown.Value == false)
+                                {
+                                    if (_input.Q.KeyDown.Value == true)
+                                        RotateY(-0.5f);
+                                    if (_input.E.KeyDown.Value == true)
+                                        RotateY(0.5f);
+                                }
+
+                                Object.transform.position = rayCaster.HitPoint;
+                                break;
+                            }
                         case BuildingType.Ground:
-                            StickToHitGround();
-                            break;
+                            {
+                                StickToHitGround();
+                                break;
+                            }
                     }
 
-                    if (_input.Q.KeyDown.Value == true)
-                        RotateY(-0.5f);
-                    if (_input.E.KeyDown.Value == true)
-                        RotateY(0.5f);
+
                 })
                 .AddTo(disposable);
 
@@ -498,22 +522,39 @@ public class LevelBuilder : EditorWindow
             Object.transform.rotation = Quaternion.Euler(0, Object.transform.rotation.eulerAngles.y + angle, 0);
         }
 
+        private int _currentStickDirectionIndex = 0;
 
-
-        private readonly Vector3[] _directionVectors = new[]
-{
+        private readonly Vector3[] _stickDirectionVectors = new[]
+        {
             Vector3.forward,
             Vector3.right,
             Vector3.back,
             Vector3.left,
         };
 
+        private void ChangeStickDirection(int addableIndex)
+        { 
+            int newIndex = _currentStickDirectionIndex + addableIndex;
+
+            if (newIndex == 4)
+            {
+                _currentStickDirectionIndex = 0;
+                return;
+            }
+            else if (newIndex == -1)
+            {
+                _currentStickDirectionIndex = 3;
+                return;
+            }
+
+            _currentStickDirectionIndex = newIndex;
+        }
 
         private void StickToHitGround()
         {
             if (_rayCaster.HitGroundObject != null)
             {
-                Object.transform.position = _rayCaster.HitGroundObject.transform.position + _directionVectors[0];
+                Object.transform.position = _rayCaster.HitGroundObject.transform.position + _stickDirectionVectors[_currentStickDirectionIndex];
             }
         }
     }
