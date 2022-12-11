@@ -49,7 +49,7 @@ public class LevelBuilder : EditorWindow
         _catalog = new Catalog();
         _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
         _createAvailability = new CreateAvailability(_options, _currentObjectEditor, _rayCaster);
-        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _disposable);
+        _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _createAvailability, _disposable);
         _preview = new Preview(_status, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
 
         _status.Value |= LevelBuilderStatus.OpionsApplied;
@@ -385,15 +385,17 @@ public class LevelBuilder : EditorWindow
         private readonly Input _input;
         private readonly RayCaster _rayCaster;
         private readonly CurrentObjectEditor _currentObjectEditor;
+        private readonly CreateAvailability _availabilityChecker;
 
         public GameObject LastCreatedObject { get; private set; }
 
-        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CreateAvailability createAvailability, CompositeDisposable disposable)
         {
             _options = options;
             _input = input;
             _rayCaster = raycaster;
             _currentObjectEditor = currentObjectEditor;
+            _availabilityChecker = createAvailability;
 
             _input
                 .LeftMouse
@@ -406,10 +408,13 @@ public class LevelBuilder : EditorWindow
 
         private void Create(Vector3 position)
         {
-            LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
-            LastCreatedObject.transform.parent = _options.Parent.transform;
-      
-            Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
+            if (_availabilityChecker.Availability.Value)
+            {
+                LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
+                LastCreatedObject.transform.parent = _options.Parent.transform;
+
+                Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
+            }
         }
     }
     public class CurrentObjectEditor
