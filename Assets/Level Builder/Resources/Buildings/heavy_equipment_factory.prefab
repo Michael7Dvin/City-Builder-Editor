@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7097314624458705687}
   - component: {fileID: 7097314624459672023}
   - component: {fileID: -265316781237662173}
+  - component: {fileID: -5744400306651094978}
   m_Layer: 0
   m_Name: heavy_equipment_factory
   m_TagString: Untagged
@@ -103,3 +104,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.3582308, y: 1.0850701, z: 3.645039}
   m_Center: {x: -1.0456568, y: 0.54253507, z: 0.99155045}
+--- !u!114 &-5744400306651094978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7097314624461608727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

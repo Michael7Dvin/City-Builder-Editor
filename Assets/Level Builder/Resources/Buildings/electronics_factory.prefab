@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 464357828448973416}
   - component: {fileID: 464357828447842472}
   - component: {fileID: 862197108046143826}
+  - component: {fileID: -1311014893268217849}
   m_Layer: 0
   m_Name: electronics_factory
   m_TagString: Untagged
@@ -103,3 +104,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.593797, y: 0.9491794, z: 3.191475}
   m_Center: {x: -0.85285676, y: 0.4745897, z: 0.9866915}
+--- !u!114 &-1311014893268217849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464357828449840744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

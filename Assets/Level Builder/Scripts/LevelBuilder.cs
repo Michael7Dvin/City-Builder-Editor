@@ -262,7 +262,7 @@ public class LevelBuilder : EditorWindow
             new CatalogPage(_pathToBuildings),
             new CatalogPage(_pathToNature),
         };
-        private readonly ReactiveProperty<GameObject> _selectedElement = new ReactiveProperty<GameObject>();
+        private readonly ReactiveProperty<Buildable> _selectedElement = new ReactiveProperty<Buildable>();
 
         private readonly Dictionary<string, string> _tabs = new Dictionary<string, string>()
         {
@@ -274,7 +274,7 @@ public class LevelBuilder : EditorWindow
 
         private Vector2 _scrollPosition;
 
-        public IReadOnlyReactiveProperty<GameObject> SelectedElement => _selectedElement;
+        public IReadOnlyReactiveProperty<Buildable> SelectedElement => _selectedElement;
 
         public void Draw(Rect editorWindowPosition)
         {
@@ -297,9 +297,9 @@ public class LevelBuilder : EditorWindow
                 _pathToResources = pathToResources;
             }
 
-            public GameObject SelectedElement { get; private set; }
+            public Buildable SelectedElement { get; private set; }
 
-            private List<GameObject> Elements = new List<GameObject>();
+            private List<Buildable> Elements = new List<Buildable>();
             private List<GUIContent> Icons
             {
                 get
@@ -308,7 +308,7 @@ public class LevelBuilder : EditorWindow
 
                     foreach (var element in Elements)
                     {
-                        Texture2D texture = AssetPreview.GetAssetPreview(element);
+                        Texture2D texture = AssetPreview.GetAssetPreview(element.gameObject);
                         catalogIcons.Add(new GUIContent(texture));
                     }
 
@@ -342,7 +342,7 @@ public class LevelBuilder : EditorWindow
                 string[] prefabFiles = System.IO.Directory.GetFiles(path, "*.prefab");
 
                 foreach (var prefabFile in prefabFiles)
-                    Elements.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(GameObject)) as GameObject);
+                    Elements.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(Buildable)) as Buildable);
             }
         }
     }
@@ -378,7 +378,7 @@ public class LevelBuilder : EditorWindow
 
         private bool IsOverlapOtherObjects()
         {
-            Vector3 halfBoxSize = _currentObjectEditor.CurrentObject.GetComponent<MeshRenderer>().bounds.size / 2;
+            Vector3 halfBoxSize = _currentObjectEditor.Object.GetComponent<MeshRenderer>().bounds.size / 2;
             Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize, Quaternion.identity, 1 << _options.BuildingsLayer.value);
 
             if (hitColliders.Length == 1)
@@ -418,7 +418,7 @@ public class LevelBuilder : EditorWindow
         private readonly CurrentObjectEditor _currentObjectEditor;
         private readonly CreateAvailability _availabilityChecker;
 
-        public GameObject LastCreatedObject { get; private set; }
+        public Buildable LastCreatedObject { get; private set; }
 
         public Creator(Options options, Input input, RayCaster raycaster, CurrentObjectEditor currentObjectEditor, CreateAvailability createAvailability, CompositeDisposable disposable)
         {
@@ -441,7 +441,7 @@ public class LevelBuilder : EditorWindow
         {
             if (_availabilityChecker.Availability.Value)
             {
-                LastCreatedObject = Instantiate(_currentObjectEditor.CurrentObject, position, _currentObjectEditor.CurrentObject.transform.rotation);
+                LastCreatedObject = Instantiate(_currentObjectEditor.Object, position, _currentObjectEditor.Object.transform.rotation);
                 LastCreatedObject.transform.parent = _options.Parent.transform;
 
                 Undo.RegisterCreatedObjectUndo(LastCreatedObject, "Create Building");
@@ -452,7 +452,7 @@ public class LevelBuilder : EditorWindow
     {
         private readonly Input _input;
 
-        public GameObject CurrentObject;
+        public Buildable Object { get; private set; }
 
         public CurrentObjectEditor(Input input, Catalog catalog, CompositeDisposable disposable)
         {
@@ -489,13 +489,13 @@ public class LevelBuilder : EditorWindow
 
             catalog
                 .SelectedElement
-                .Subscribe(_ => CurrentObject = _)
+                .Subscribe(element => Object = element)
                 .AddTo(disposable);
         }
 
         private void RotateY(float angle)
         {
-            CurrentObject.transform.rotation = Quaternion.Euler(0, CurrentObject.transform.rotation.eulerAngles.y + angle, 0);
+            Object.transform.rotation = Quaternion.Euler(0, Object.transform.rotation.eulerAngles.y + angle, 0);
         }
     }
     public class Preview
@@ -516,7 +516,7 @@ public class LevelBuilder : EditorWindow
             catalog
                 .SelectedElement
                 .Skip(1)
-                .Subscribe(_ => ReCreatePreviewGameobject(_))
+                .Subscribe(_ => ReCreatePreviewGameobject(_.gameObject))
                 .AddTo(disposable);
 
             levelBuilderStatus
@@ -551,7 +551,7 @@ public class LevelBuilder : EditorWindow
             {
                 _previewMeshRenderer.enabled = true;
                 _preview.transform.position = mousePosition;
-                _preview.transform.rotation = _currentObjectEditor.CurrentObject.transform.rotation;
+                _preview.transform.rotation = _currentObjectEditor.Object.transform.rotation;
             }
         }
 

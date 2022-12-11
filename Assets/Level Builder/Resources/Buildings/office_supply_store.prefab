@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2344456897529298655}
   - component: {fileID: 2344456897528331295}
   - component: {fileID: 4789625079647694849}
+  - component: {fileID: 7371462520436080000}
   m_Layer: 0
   m_Name: office_supply_store
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3510303, y: 1.3978996, z: 1.5280432}
   m_Center: {x: -0.028645217, y: 0.6989498, z: 0.124129355}
+--- !u!114 &7371462520436080000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2344456897526063839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

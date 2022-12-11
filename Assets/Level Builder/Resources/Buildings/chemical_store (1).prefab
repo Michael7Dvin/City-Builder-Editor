@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6393301795095905535}
   - component: {fileID: 6393301795096905279}
   - component: {fileID: -1498930685184947503}
+  - component: {fileID: 6671061629341664}
   m_Layer: 0
   m_Name: chemical_store (1)
   m_TagString: Untagged
@@ -102,3 +103,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.723415, y: 1.0011327, z: 1.7277124}
   m_Center: {x: -0.9831958, y: 0.4951253, z: 0.053378135}
+--- !u!114 &6671061629341664
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6393301795098908927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

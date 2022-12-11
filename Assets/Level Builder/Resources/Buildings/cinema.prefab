@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5499741059995045742}
   - component: {fileID: 5499741059996175790}
   - component: {fileID: -2150261928511295586}
+  - component: {fileID: 8176607977954728851}
   m_Layer: 0
   m_Name: cinema
   m_TagString: Untagged
@@ -105,3 +106,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.7413988, y: 1.0841525, z: 3.1487286}
   m_Center: {x: -0.9004028, y: 0.53595495, z: 0.93577254}
+--- !u!114 &8176607977954728851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5499741059993916270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

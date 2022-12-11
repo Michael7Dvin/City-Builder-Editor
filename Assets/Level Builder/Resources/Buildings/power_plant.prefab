@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7261635672464182509}
   - component: {fileID: 7261635672465280557}
   - component: {fileID: -4646190035199630943}
+  - component: {fileID: -1754797383930406436}
   m_Layer: 0
   m_Name: power_plant
   m_TagString: Untagged
@@ -102,3 +103,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.56464, y: 1.7500615, z: 5.5647697}
   m_Center: {x: -2.8551106, y: 0.7979131, z: 1.9158297}
+--- !u!114 &-1754797383930406436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7261635672467542253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8311215642429524761}
   - component: {fileID: 8311215642430654937}
   - component: {fileID: 7814887299202695898}
+  - component: {fileID: 1314057490494687623}
   m_Layer: 0
   m_Name: heavy_equipment_store
   m_TagString: Untagged
@@ -104,3 +105,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.0234933, y: 1.0011327, z: 1.6603951}
   m_Center: {x: -1.3331566, y: 0.4951253, z: 0.08703676}
+--- !u!114 &1314057490494687623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8311215642428397337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

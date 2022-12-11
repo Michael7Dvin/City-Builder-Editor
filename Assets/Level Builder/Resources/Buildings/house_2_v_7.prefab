@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1659432469491030927}
   - component: {fileID: 1659432469492029775}
   - component: {fileID: 3876654496750638523}
+  - component: {fileID: 4905773322956548194}
   m_Layer: 0
   m_Name: house_2_v_7
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.1354877, y: 1.1165076, z: 1.5514731}
   m_Center: {x: -0.018082976, y: 0.55185777, z: 0.1684207}
+--- !u!114 &4905773322956548194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659432469494024079}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

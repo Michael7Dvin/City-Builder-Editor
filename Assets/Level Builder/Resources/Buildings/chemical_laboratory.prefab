@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 608495588970244629}
   - component: {fileID: 608495588969277653}
   - component: {fileID: -1848958750866149945}
+  - component: {fileID: -666502291449974383}
   m_Layer: 0
   m_Name: chemical_laboratory
   m_TagString: Untagged
@@ -101,3 +102,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.1770976, y: 1.2248175, z: 3.4679308}
   m_Center: {x: -1.086325, y: 0.6069677, z: 1.1074414}
+--- !u!114 &-666502291449974383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608495588967020053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

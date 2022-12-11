@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 210118542646112472}
   - component: {fileID: 210118542647210520}
   - component: {fileID: 8137723479369038160}
+  - component: {fileID: 5705780914478590029}
   m_Layer: 0
   m_Name: tobacco_plantation
   m_TagString: Untagged
@@ -100,3 +101,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.9248557, y: 0.36344075, z: 2.0038211}
   m_Center: {x: -1.02, y: 0.18167394, z: 0.057331324}
+--- !u!114 &5705780914478590029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210118542645210328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2327360dfdc07845b416a5b1425d58e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
