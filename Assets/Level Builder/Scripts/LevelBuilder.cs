@@ -4,11 +4,22 @@ using UnityEngine;
 using UnityEditor;
 using UniRx;
 using Cysharp.Threading.Tasks;
+using System;
 
 public class LevelBuilder : EditorWindow
 {
-    private readonly ReactiveProperty<bool> _isEditorActive = new ReactiveProperty<bool>(true);
-    private readonly ReactiveProperty<bool> _isInCreationMode = new ReactiveProperty<bool>();
+    [Flags]
+    public enum LevelBuilderStatus
+    {
+        Nothing = 0,
+        Everything = -1,
+        Enabled = 1 << 0,
+        OpionsApplied = 1 << 1,
+        BuildMode = 1 << 2,
+    }
+
+    public readonly ReactiveProperty<LevelBuilderStatus> _status = new ReactiveProperty<LevelBuilderStatus>(LevelBuilderStatus.Nothing);
+    private bool _buildingToggleStatus = false;
 
     private Options _options;
     private Input _input;
@@ -19,12 +30,7 @@ public class LevelBuilder : EditorWindow
     private CurrentObjectEditor _currentObjectEditor;
     private Preview _preview;
 
-    private GameObject _createdObject;
-
     public readonly CompositeDisposable _disposable = new CompositeDisposable();
-
-    public IReadOnlyReactiveProperty<bool> IsEditorActive => _isEditorActive;
-    public IReadOnlyReactiveProperty<bool> IsInCreationMode => _isInCreationMode;
 
     [MenuItem("Level/Builder")]
     private static void ShowWindow()
@@ -36,7 +42,7 @@ public class LevelBuilder : EditorWindow
     {
         _options = new Options();
 
-        await new WaitUntil(() => _options.IsOptionsApplied.Value == true);
+        await new WaitUntil(() => _options.IsApplied == true);
 
         _input = new Input();
         _rayCaster = new RayCaster(_options);
@@ -44,23 +50,25 @@ public class LevelBuilder : EditorWindow
         _currentObjectEditor = new CurrentObjectEditor(_input, _catalog, _disposable);
         _createAvailability = new CreateAvailability(_options, _currentObjectEditor, _rayCaster);
         _creation = new Creator(_options, _input, _rayCaster, _currentObjectEditor, _disposable);
-        _preview = new Preview(this, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
+        _preview = new Preview(_status, _options, _rayCaster, _catalog, _createAvailability, _currentObjectEditor, _disposable);
+
+        _status.Value |= LevelBuilderStatus.OpionsApplied;
     }
 
     private void OnEnable()
     {
-        _isEditorActive.Value = true;
+        _status.Value |= LevelBuilderStatus.Enabled;
         Initialize();
     }
     private void OnDisable()
     {
-        _isEditorActive.Value = false;
+        _status.Value |= LevelBuilderStatus.Nothing;
         _disposable.Clear();
     }
 
     private void OnFocus()
     {
-        if (_isEditorActive.Value == true)
+        if (_status.Value.HasFlag(LevelBuilderStatus.Enabled))
         {
             SceneView.duringSceneGui -= OnSceneGUI;
             SceneView.duringSceneGui += OnSceneGUI;
@@ -69,51 +77,41 @@ public class LevelBuilder : EditorWindow
 
     private void OnGUI()
     {
-        if (_isEditorActive.Value == true)
+        if (_status.Value.HasFlag(LevelBuilderStatus.OpionsApplied) == true)
         {
-            if (_options.IsOptionsApplied.Value == true)
+            _buildingToggleStatus = GUILayout.Toggle(_buildingToggleStatus, "Start building", "Button", GUILayout.Height(60));
+
+            if (_buildingToggleStatus == true)
             {
-                if (_createdObject != null)
-                {
-                    EditorGUILayout.LabelField("Created Object Settings");
-                    Transform transformToCreate = _createdObject.transform;
-                    transformToCreate.position = EditorGUILayout.Vector3Field("Position", transformToCreate.position);
-                    transformToCreate.rotation = Quaternion.Euler(EditorGUILayout.Vector3Field("Position", transformToCreate.rotation.eulerAngles));
-                    transformToCreate.localScale = EditorGUILayout.Vector3Field("Position", transformToCreate.localScale);
-                }
-                            
-                _isInCreationMode.Value = GUILayout.Toggle(_isInCreationMode.Value, "Start building", "Button", GUILayout.Height(60));
-                _catalog.Draw(position);
+                _status.Value |= LevelBuilderStatus.BuildMode;
             }
             else
             {
-                _options.Draw();
-            }        
+                _status.Value &= ~LevelBuilderStatus.BuildMode;
+            }
+
+            _catalog.Draw(position);
         }
+        else
+        {
+            _options.Draw();
+        }                
     }
 
     private void OnSceneGUI(SceneView sceneView)
     {
-        if (_isEditorActive.Value == true)
+        if (_status.Value.HasFlag(LevelBuilderStatus.BuildMode) == true)
         {
-            if (_options.IsOptionsApplied.Value == true)
-            {
-                if (_isInCreationMode.Value)
-                {
-                    _rayCaster.Raycast();
-                    _preview.Draw(sceneView);
-                    _input.CheckInputs();
-                    _createAvailability.Update();
-                }
-            }
-        }
+            _rayCaster.Raycast();
+            _preview.Draw(sceneView);
+            _input.CheckInputs();
+            _createAvailability.Update();
+        }      
     }
 
     public class Options
     {
-        private readonly ReactiveProperty<bool> _isOptionsApplied = new ReactiveProperty<bool>();
-
-        public IReadOnlyReactiveProperty<bool> IsOptionsApplied => _isOptionsApplied;
+        public bool IsApplied { get; private set; }
 
         public GameObject Parent { get; private set; }
 
@@ -140,14 +138,14 @@ public class LevelBuilder : EditorWindow
             {
                 if (Parent != null && BuildAllowed != null && BuildDisallowed != null && GroundLayer.value != 0 && BuildingsLayer.value != 0)
                 {
-                    _isOptionsApplied.Value = true;
+                    IsApplied = true;
                 }
             }
         }
     }
     public class Input
     {
-        public MouseKey Left { get; private set; } = new MouseKey(0);
+        public MouseKey LeftMouse { get; private set; } = new MouseKey(0);
 
         public KeyboardKey Q { get; private set; } = new KeyboardKey(KeyCode.Q);
         public KeyboardKey E { get; private set; } = new KeyboardKey(KeyCode.E);
@@ -157,7 +155,7 @@ public class LevelBuilder : EditorWindow
         {
             HandleUtility.AddDefaultControl(0);
 
-            Left.CheckInput();
+            LeftMouse.CheckInput();
             
             Q.CheckInput();
             E.CheckInput();
@@ -386,7 +384,6 @@ public class LevelBuilder : EditorWindow
         private readonly Options _options;
         private readonly Input _input;
         private readonly RayCaster _rayCaster;
-        private readonly Catalog _catalog;
         private readonly CurrentObjectEditor _currentObjectEditor;
 
         public GameObject LastCreatedObject { get; private set; }
@@ -399,7 +396,7 @@ public class LevelBuilder : EditorWindow
             _currentObjectEditor = currentObjectEditor;
 
             _input
-                .Left
+                .LeftMouse
                 .KeyDown
                 .Skip(1)
                 .Where(_ => _ == true)
@@ -474,7 +471,7 @@ public class LevelBuilder : EditorWindow
         private GameObject _preview;
         private MeshRenderer _previewMeshRenderer;
 
-        public Preview(LevelBuilder levelBuilder, Options options, RayCaster rayCaster, Catalog catalog, CreateAvailability createAvailability, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
+        public Preview(ReactiveProperty<LevelBuilderStatus> levelBuilderStatus, Options options, RayCaster rayCaster, Catalog catalog, CreateAvailability createAvailability, CurrentObjectEditor currentObjectEditor, CompositeDisposable disposable)
         {
             _options = options;
             _rayCaster = rayCaster;
@@ -486,26 +483,16 @@ public class LevelBuilder : EditorWindow
                 .Subscribe(_ => ReCreatePreviewGameobject(_))
                 .AddTo(disposable);
 
-            levelBuilder
-                ._isEditorActive
-                .Where(_ => _ == false)
+            levelBuilderStatus
                 .Subscribe(_ =>
                 {
-                    if (_preview != null)
-                        DestroyImmediate(_preview);
-                })
-                .AddTo(disposable);
-
-            levelBuilder
-                ._isInCreationMode
-                .Where(_ => _ == false)
-                .Subscribe(_ =>
-                {
-                    if (_preview != null)
-                        DestroyImmediate(_preview);
-                })
-                .AddTo(disposable);
-
+                    if (_.HasFlag(LevelBuilderStatus.BuildMode) == false)
+                    {
+                        if (_preview != null)
+                            DestroyImmediate(_preview);
+                    }
+                });
+          
             createAvailability
                 .Availability
                 .Skip(1)
