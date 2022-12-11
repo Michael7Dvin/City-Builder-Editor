@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6786829920240194215}
   - component: {fileID: 6786829920239391367}
   - component: {fileID: 6786829920238424135}
-  - component: {fileID: 3912425698056987880}
-  m_Layer: 7
+  - component: {fileID: 2044743020763787501}
+  m_Layer: 0
   m_Name: pharmaceutical_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3912425698056987880
+--- !u!65 &2044743020763787501
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

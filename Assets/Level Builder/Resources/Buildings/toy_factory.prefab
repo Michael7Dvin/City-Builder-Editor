@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2554375563504250304}
   - component: {fileID: 2554375563505544672}
   - component: {fileID: 2554375563506544416}
-  - component: {fileID: -9215679245011453115}
-  m_Layer: 7
+  - component: {fileID: 2022337892999190889}
+  m_Layer: 0
   m_Name: toy_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-9215679245011453115
+--- !u!65 &2022337892999190889
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

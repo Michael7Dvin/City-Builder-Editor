@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2344456897526431487}
   - component: {fileID: 2344456897529298655}
   - component: {fileID: 2344456897528331295}
-  - component: {fileID: 238958244767146823}
-  m_Layer: 7
+  - component: {fileID: 4789625079647694849}
+  m_Layer: 0
   m_Name: office_supply_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &238958244767146823
+--- !u!65 &4789625079647694849
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

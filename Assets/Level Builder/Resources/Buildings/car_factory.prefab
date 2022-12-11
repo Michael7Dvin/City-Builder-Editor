@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7855706653613380533}
   - component: {fileID: 7855706653616247701}
   - component: {fileID: 7855706653615280469}
-  - component: {fileID: 7247189121730044634}
-  m_Layer: 7
+  - component: {fileID: 6081118861214499531}
+  m_Layer: 0
   m_Name: car_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7855706653613346709}
-  m_LocalRotation: {x: 0, y: 0.10019121, z: 0, w: -0.99496824}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7247189121730044634
+--- !u!65 &6081118861214499531
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

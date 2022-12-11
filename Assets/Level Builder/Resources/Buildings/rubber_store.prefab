@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 1383210388686375679}
   - component: {fileID: 1383210388689799903}
   - component: {fileID: 1383210388688799775}
-  - component: {fileID: -1946990688744232878}
-  m_Layer: 7
+  - component: {fileID: -8071313176168038268}
+  m_Layer: 0
   m_Name: rubber_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383210388686870239}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-1946990688744232878
+--- !u!65 &-8071313176168038268
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

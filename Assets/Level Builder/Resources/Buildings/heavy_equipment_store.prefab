@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8311215642428230457}
   - component: {fileID: 8311215642429524761}
   - component: {fileID: 8311215642430654937}
-  - component: {fileID: -1048122147184880906}
-  m_Layer: 7
+  - component: {fileID: 7814887299202695898}
+  m_Layer: 0
   m_Name: heavy_equipment_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-1048122147184880906
+--- !u!65 &7814887299202695898
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

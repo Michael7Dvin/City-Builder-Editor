@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6165051399205855155}
   - component: {fileID: 6165051399202987923}
   - component: {fileID: 6165051399204085075}
-  - component: {fileID: -4915523427703872984}
-  m_Layer: 7
+  - component: {fileID: -7810167625536451949}
+  m_Layer: 0
   m_Name: police_academy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-4915523427703872984
+--- !u!65 &-7810167625536451949
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

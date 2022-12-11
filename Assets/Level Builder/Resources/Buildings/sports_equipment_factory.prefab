@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3510261795446692523}
   - component: {fileID: 3510261795443825291}
   - component: {fileID: 3510261795444791371}
-  - component: {fileID: 4549112342562262750}
-  m_Layer: 7
+  - component: {fileID: -581070741371961593}
+  m_Layer: 0
   m_Name: sports_equipment_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4549112342562262750
+--- !u!65 &-581070741371961593
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

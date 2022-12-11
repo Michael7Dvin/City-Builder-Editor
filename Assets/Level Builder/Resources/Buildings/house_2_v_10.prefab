@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 8174437813940216104}
   - component: {fileID: 8174437813938888968}
   - component: {fileID: 8174437813937791944}
-  - component: {fileID: -2538073240449956490}
-  m_Layer: 7
+  - component: {fileID: 5048311543536724353}
+  m_Layer: 0
   m_Name: house_2_v_10
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8174437813940059400}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.00000008742278, z: 0, w: -1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-2538073240449956490
+--- !u!65 &5048311543536724353
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

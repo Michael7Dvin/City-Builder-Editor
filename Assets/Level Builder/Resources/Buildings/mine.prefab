@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5411077851377417511}
   - component: {fileID: 5411077851378220295}
   - component: {fileID: 5411077851379187655}
-  - component: {fileID: -531859483252675495}
-  m_Layer: 7
+  - component: {fileID: -3273437614597187707}
+  m_Layer: 0
   m_Name: mine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5411077851377180935}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-531859483252675495
+--- !u!65 &-3273437614597187707
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

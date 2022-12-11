@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2878717127361577539}
   - component: {fileID: 2878717127358677603}
   - component: {fileID: 2878717127359807651}
-  - component: {fileID: -8074396580045329913}
-  m_Layer: 7
+  - component: {fileID: 3033338747055087433}
+  m_Layer: 0
   m_Name: studio_video_games
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-8074396580045329913
+--- !u!65 &3033338747055087433
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

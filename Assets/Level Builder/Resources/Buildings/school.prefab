@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6873246401497183582}
   - component: {fileID: 6873246401494316414}
   - component: {fileID: 6873246401495414718}
-  - component: {fileID: 7963449676014921173}
-  m_Layer: 7
+  - component: {fileID: -6009712396302699606}
+  m_Layer: 0
   m_Name: school
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7963449676014921173
+--- !u!65 &-6009712396302699606
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

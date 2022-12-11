@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7084698308897493623}
   - component: {fileID: 7084698308896166487}
   - component: {fileID: 7084698308895068311}
-  - component: {fileID: 7900311445831455440}
-  m_Layer: 7
+  - component: {fileID: 7247964067241702156}
+  m_Layer: 0
   m_Name: furniture_store
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7900311445831455440
+--- !u!65 &7247964067241702156
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

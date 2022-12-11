@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2421350580506093544}
   - component: {fileID: 2421350580509485000}
   - component: {fileID: 2421350580508517640}
-  - component: {fileID: 4719606593885141002}
-  m_Layer: 7
+  - component: {fileID: -633708556344382868}
+  m_Layer: 0
   m_Name: university
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2421350580506590152}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &4719606593885141002
+--- !u!65 &-633708556344382868
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

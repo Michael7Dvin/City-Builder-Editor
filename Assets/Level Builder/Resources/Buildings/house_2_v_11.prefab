@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6894005105725448398}
   - component: {fileID: 6894005105722056942}
   - component: {fileID: 6894005105723154990}
-  - component: {fileID: -472222248915070231}
-  m_Layer: 7
+  - component: {fileID: 6462467538392158029}
+  m_Layer: 0
   m_Name: house_2_v_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-472222248915070231
+--- !u!65 &6462467538392158029
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5192361323726158979}
   - component: {fileID: 5192361323724864675}
   - component: {fileID: 5192361323723865699}
-  - component: {fileID: -6021156029384429142}
-  m_Layer: 7
+  - component: {fileID: 1117098102065101630}
+  m_Layer: 0
   m_Name: food_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5192361323726053539}
-  m_LocalRotation: {x: 0, y: 0.89493567, z: 0, w: -0.4461952}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -90,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-6021156029384429142
+--- !u!65 &1117098102065101630
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

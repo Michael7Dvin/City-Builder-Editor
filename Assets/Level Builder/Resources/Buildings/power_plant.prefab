@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 7261635672467573965}
   - component: {fileID: 7261635672464182509}
   - component: {fileID: 7261635672465280557}
-  - component: {fileID: 230576560850380258}
-  m_Layer: 7
+  - component: {fileID: -4646190035199630943}
+  m_Layer: 0
   m_Name: power_plant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &230576560850380258
+--- !u!65 &-4646190035199630943
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

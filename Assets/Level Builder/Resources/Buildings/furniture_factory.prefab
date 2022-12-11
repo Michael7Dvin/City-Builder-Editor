@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6671140809167202770}
   - component: {fileID: 6671140809170070002}
   - component: {fileID: 6671140809168972594}
-  - component: {fileID: -4475012992520114749}
-  m_Layer: 7
+  - component: {fileID: 5416183151605724687}
+  m_Layer: 0
   m_Name: furniture_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -91,7 +91,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-4475012992520114749
+--- !u!65 &5416183151605724687
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

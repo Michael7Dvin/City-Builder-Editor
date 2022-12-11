@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 464357828449743432}
   - component: {fileID: 464357828448973416}
   - component: {fileID: 464357828447842472}
-  - component: {fileID: -3492983755650367702}
-  m_Layer: 7
+  - component: {fileID: 862197108046143826}
+  m_Layer: 0
   m_Name: electronics_factory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-3492983755650367702
+--- !u!65 &862197108046143826
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5836419166774399445}
   - component: {fileID: 5836419166775202293}
   - component: {fileID: 5836419166776300341}
-  - component: {fileID: -5694293205138857290}
-  m_Layer: 7
+  - component: {fileID: -825120324103623125}
+  m_Layer: 0
   m_Name: city_hall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5836419166774038005}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -88,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &-5694293205138857290
+--- !u!65 &-825120324103623125
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
