@@ -122,6 +122,7 @@ public class LevelBuilder : EditorWindow
 
         public LayerMask GroundLayer{ get; private set; }
         public LayerMask BuildingsLayer { get; private set; }
+        public LayerMask NatureLayer { get; private set; }
       
 
         public void Draw()
@@ -135,6 +136,7 @@ public class LevelBuilder : EditorWindow
 
             GroundLayer = EditorGUILayout.LayerField("Ground Layer", GroundLayer);
             BuildingsLayer = EditorGUILayout.LayerField("Buildings Layer", BuildingsLayer);
+            NatureLayer = EditorGUILayout.LayerField("Nature Layer", NatureLayer);
 
             if (GUILayout.Button("Apply"))
             {
@@ -299,14 +301,15 @@ public class LevelBuilder : EditorWindow
 
             public Buildable SelectedElement { get; private set; }
 
-            private List<Buildable> Elements = new List<Buildable>();
+            private List<Buildable> _elements = new List<Buildable>();
+
             private List<GUIContent> Icons
             {
                 get
                 {
                     List<GUIContent> catalogIcons = new List<GUIContent>();
 
-                    foreach (var element in Elements)
+                    foreach (var element in _elements)
                     {
                         Texture2D texture = AssetPreview.GetAssetPreview(element.gameObject);
                         catalogIcons.Add(new GUIContent(texture));
@@ -322,7 +325,7 @@ public class LevelBuilder : EditorWindow
 
                 int gridSizeInPixels = 80;
                 int collumns = (int)(editorWindowPosition.width / gridSizeInPixels);
-                int rows = (Elements.Count / collumns) + 1;
+                int rows = (_elements.Count / collumns) + 1;
 
                 _selectedElementIndex = GUILayout.SelectionGrid
                     (_selectedElementIndex,
@@ -331,18 +334,18 @@ public class LevelBuilder : EditorWindow
                     GUILayout.MaxWidth(collumns * gridSizeInPixels),
                     GUILayout.MaxHeight(rows * gridSizeInPixels));
 
-                SelectedElement = Elements[_selectedElementIndex];
+                SelectedElement = _elements[_selectedElementIndex];
             }
 
             private void RefreshInFolder(string path)
             {
-                Elements.Clear();
+                _elements.Clear();
 
                 System.IO.Directory.CreateDirectory(path);
                 string[] prefabFiles = System.IO.Directory.GetFiles(path, "*.prefab");
 
                 foreach (var prefabFile in prefabFiles)
-                    Elements.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(Buildable)) as Buildable);
+                    _elements.Add(AssetDatabase.LoadAssetAtPath(prefabFile, typeof(Buildable)) as Buildable);
             }
         }
     }
@@ -519,7 +522,7 @@ public class LevelBuilder : EditorWindow
 
         private void RotateY(float angle)
         {
-            Object.transform.rotation = Quaternion.Euler(0, Object.transform.rotation.eulerAngles.y + angle, 0);
+            Object.transform.rotation = Quaternion.Euler(Object.transform.rotation.eulerAngles.x, Object.transform.rotation.eulerAngles.y + angle, Object.transform.rotation.eulerAngles.z);
         }
 
         private int _currentStickDirectionIndex = 0;
