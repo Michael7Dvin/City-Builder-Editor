@@ -225,21 +225,21 @@ public class LevelBuilder : EditorWindow
         }
 
         public Vector3 HitPoint { get; private set; }
-        public GameObject HitGround { get; private set; }
+        public GameObject HitGroundObject { get; private set; }
 
-        public bool IsHitGround => HitGround != null;
+        public bool IsHitGround => HitGroundObject != null;
 
         public bool Raycast()
         {
             Ray guiRay = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
 
             HitPoint = Vector3.zero;
-            HitGround = null;
+            HitGroundObject = null;
 
             if (Physics.Raycast(guiRay, out RaycastHit raycastHit, Mathf.Infinity, 1 << _options.GroundLayer.value))
             {
                 HitPoint = raycastHit.point;
-                HitGround = raycastHit.collider.gameObject;
+                HitGroundObject = raycastHit.collider.gameObject;
                 return true;               
             }
 
@@ -352,14 +352,6 @@ public class LevelBuilder : EditorWindow
         private readonly CurrentObjectEditor _currentObjectEditor;
         private readonly RayCaster _rayCaster;
 
-        private readonly Vector3[] _directionVectors = new[]
-        {
-            Vector3.forward,
-            Vector3.right,
-            Vector3.back,
-            Vector3.left,
-        };
-
         private readonly ReactiveProperty<bool> _availability = new ReactiveProperty<bool>();
 
         public CreateAvailability(Options options, CurrentObjectEditor currentObjectEditor, RayCaster rayCaster)
@@ -389,26 +381,24 @@ public class LevelBuilder : EditorWindow
             return true;
         }
 
-        private bool IsOverlapRoadTile()
-        {
-            Vector3 cursorPosition = new Vector3();
-            Vector3 halfBoxSize = _currentObjectEditor.Object.GetComponent<MeshRenderer>().bounds.size / 2;
-            Collider[] hitColliders = Physics.OverlapBox(cursorPosition, halfBoxSize);
-            bool isRoadDetected = false;
-            Collider roadCollider = new Collider();
+        //private bool IsOverlapRoadTile()
+        //{
+        //    Collider ground = _rayCaster.HitGroundObject.GetComponent<Collider>();
 
-            foreach (var collider in hitColliders)
-            {
-                if (collider.GetComponent<Ground>())
-                {
-                    isRoadDetected = true;
-                    roadCollider = collider;
-                    return true;
-                }
-            }
+        //    Vector3 halfBoxSize = _currentObjectEditor.Object.GetComponent<MeshRenderer>().bounds.size / 2;
+        //    Collider[] hitColliders = Physics.OverlapBox(_rayCaster.HitPoint, halfBoxSize);
 
-            return false;
-        }
+        //    foreach (var collider in hitColliders)
+        //    {
+        //        if (collider.GetComponent<Ground>())
+        //        {
+        //            ground = collider;
+        //            return true;
+        //        }
+        //    }
+
+        //    return false;
+        //}
     }
     public class Creator
     {
@@ -449,12 +439,14 @@ public class LevelBuilder : EditorWindow
     public class CurrentObjectEditor
     {
         private readonly Input _input;
+        private readonly RayCaster _rayCaster;
 
         public Buildable Object { get; private set; }
 
         public CurrentObjectEditor(Input input, RayCaster rayCaster, Catalog catalog, CompositeDisposable disposable)
         {
             _input = input;
+            _rayCaster = rayCaster;
 
             _input
                 .Q
@@ -478,7 +470,15 @@ public class LevelBuilder : EditorWindow
                 .Where(_ => _input.LeftShift.KeyDown.Value == false)
                 .Subscribe(_ =>
                 {
-                    Object.transform.position = rayCaster.HitPoint;
+                    switch (Object.Type)
+                    {
+                        case BuildingType.House:
+                            Object.transform.position = rayCaster.HitPoint;
+                            break;
+                        case BuildingType.Ground:
+                            StickToHitGround();
+                            break;
+                    }
 
                     if (_input.Q.KeyDown.Value == true)
                         RotateY(-0.5f);
@@ -496,6 +496,25 @@ public class LevelBuilder : EditorWindow
         private void RotateY(float angle)
         {
             Object.transform.rotation = Quaternion.Euler(0, Object.transform.rotation.eulerAngles.y + angle, 0);
+        }
+
+
+
+        private readonly Vector3[] _directionVectors = new[]
+{
+            Vector3.forward,
+            Vector3.right,
+            Vector3.back,
+            Vector3.left,
+        };
+
+
+        private void StickToHitGround()
+        {
+            if (_rayCaster.HitGroundObject != null)
+            {
+                Object.transform.position = _rayCaster.HitGroundObject.transform.position + _directionVectors[0];
+            }
         }
     }
     public class Preview

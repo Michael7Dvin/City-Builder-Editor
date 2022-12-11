@@ -1,4 +1,4 @@
 public class House : Buildable
 {
-    public BuildingType Type => BuildingType.House;
+    public override BuildingType Type => BuildingType.House;
 }

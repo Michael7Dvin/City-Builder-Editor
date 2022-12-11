@@ -1,4 +1,4 @@
 public class Ground : Buildable
 {
-    public BuildingType Type => BuildingType.Ground;
+    public override BuildingType Type => BuildingType.Ground;
 }
