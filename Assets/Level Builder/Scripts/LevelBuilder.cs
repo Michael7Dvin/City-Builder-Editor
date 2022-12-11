@@ -373,10 +373,10 @@ public class LevelBuilder : EditorWindow
 
             if (hitColliders.Length == 1)
             {
-                return true;
+                return false;
             }
 
-            return false;
+            return true;
         }
     }
     public class Creator
